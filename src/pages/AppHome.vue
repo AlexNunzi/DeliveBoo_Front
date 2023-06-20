@@ -10,14 +10,14 @@ export default {
    data() {
       return {
          types: [],
-         checked:[1,4],
+         checked:[1,4,7],
          restaurant: [],
          lista: false,
       }
    },
    methods: {
       check(index) {
-         const label = document.getElementById(index);
+         const label = document.getElementById('lable' + index);
          label.classList.toggle("checked")
          // if(){
 
@@ -34,7 +34,7 @@ export default {
       },
       getTypes() {
          this.loading = true;
-         axios.get(`http://127.0.0.1:8000/api/types/`)
+         axios.get(`http://127.0.0.1:8001/api/types/`)
          .then(response => {
             this.types = response.data.results;
             console.log(this.types);
@@ -42,7 +42,7 @@ export default {
          
       },
       getRestaurant() {
-         axios.get(`http://127.0.0.1:8000/api/restaurant/type`,
+         axios.get(`http://127.0.0.1:8001/api/restaurant/type`,
          {
             params: {
                "type_id[]" : this.checked
@@ -66,8 +66,8 @@ export default {
    <form action="/" method="post" class="py-5">
       <div class="row g-3 py-3 justify-content-around">
          <div class="col-6 col-md-4 col-lg-3" v-for="(tipo, i) in types">
-            <input :id="tipo.id++" type="checkbox" class="d-none cecco" :value="tipo.id" name="type_id[]">
-            <label :id="i" :for="tipo.name" class="carta bg-white text-center" @click="check(tipo.id)">
+            <input :id="tipo.id" type="checkbox" class="d-none cecco" :value="tipo.id" name="type_id[]">
+            <label :id="'lable' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
                <!-- <img :src="`../../public/${tipo.name}.jpg`" :alt="'Immagine ristorante ' + tipo.name"> -->
                <div class="centrato">
                   <h6 class="p-2">{{ tipo.name }}</h6>
