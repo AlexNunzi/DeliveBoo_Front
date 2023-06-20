@@ -1,18 +1,30 @@
 <script>
+import axios from 'axios';
 import FoodModal from "../components/FoodModal.vue";
 
 export default {
    name: "AppRestaurant",
    data() {
       return {
-         food: ['Pizza', 'Panino', 'Pasta', 'Riso', 'Spaghetti', 'Biscotti', 'Involtini', 'Arrosto', 'Insalata', "Formaggio", "Lasagne", "Cappelletti"],
+         foods: [],
          quantity: 0,
       }
-   },
+   }, 
    components: {
       FoodModal
    },
    methods: {
+      getFoods(){
+         const restaurant_id = this.$route.params.id;
+         axios.get(`http://127.0.0.1:8000/api/foods/${restaurant_id}`)
+         .then(response => {
+            this.foods = response.data.results;
+            console.log(response.data.results)
+         });
+      }
+   },
+   mounted() {
+      this.getFoods();
    }
 }
 </script>
@@ -25,14 +37,14 @@ export default {
          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore dolorum optio, recusandae vero itaque animi qui voluptates eveniet mollitia commodi facere voluptas nostrum aliquam vitae. Placeat voluptas id eligendi dolores!</p>
       </div>
    </div>
-   <FoodModal></FoodModal>
+   <FoodModal/>
    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-6 g-3 py-3 justify-content-around">
-      <div v-for="(cibo, i) in food" class="col carta bg-white text-center">
-         <div class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <img src="https://picsum.photos/200/300" :alt="'Immagine ristorante ' + cibo">
+      <div v-for="food in foods" class="col carta bg-white text-center">
+         <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <img :src="`http://127.0.0.1:8000/storage/${food.image}`" :alt="'Immagine ristorante ' + food.name">
             <div class="centrato flex-column">
-               <h6 class="p-2 m-0">{{ cibo }}</h6>
-               <small>Prezzo €</small>
+               <h6 class="p-2 m-0">{{ food.name }}</h6>
+               <small>{{ food.price }} €</small>
             </div>
          </div>
          <div id="btn-cart" class="my-2 bg-warning" @click="quantity++" v-show="quantity<1">
@@ -66,12 +78,6 @@ export default {
    overflow: hidden;
    width: 11rem;
 }
-.checked {
-   scale: 1.02;
-   box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.4);
-}
-
-
 .carta img{
    height: 10rem;
    width: 100%;

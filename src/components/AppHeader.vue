@@ -38,7 +38,7 @@ export default {
                </ul>
                
             </div>
-            <i class="fa-solid fa-cart-shopping position-relative" data-bs-toggle="dropdown">
+            <i class="fa-brands fa-opencart position-relative" data-bs-toggle="dropdown">
                <span class="fw-lighter position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">10</span>
             </i>
             <div class="d-flex align-items-center">
@@ -63,7 +63,7 @@ export default {
    font-weight: bold;
 }
 
-.fa-cart-shopping{
+.fa-opencart{
    font-size: 1.5rem;
    cursor: pointer;
    span{
