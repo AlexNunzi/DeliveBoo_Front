@@ -10,39 +10,32 @@ export default {
    data() {
       return {
          types: [],
-         checked:[1,4,7],
-         restaurant: [],
+         checked:[],
+         restaurants: [],
          lista: false,
       }
    },
    methods: {
       check(index) {
-         const label = document.getElementById('lable' + index);
+         const label = document.getElementById('label' + index);
          label.classList.toggle("checked")
-         // if(){
-
-         // } else{
-         //    this.checked.push(index);
-         // }
-
-
-         //con if, controlla se il tipo/ristorante non è nell'array, lo aggiunge, se c'è lo toglie
-         //cicla array e mostra nella lista (dopo il click su "Lista"?!)
-
-         // this.getRestaurant();
+         if(this.checked.includes(index)){
+            this.checked = this.checked.filter(x => x != index)
+         } else{
+            this.checked.push(index);
+         }
          console.log(index)
       },
       getTypes() {
          this.loading = true;
-         axios.get(`http://127.0.0.1:8001/api/types/`)
+         axios.get(`http://127.0.0.1:8000/api/types/`)
          .then(response => {
             this.types = response.data.results;
-            console.log(this.types);
          });
          
       },
-      getRestaurant() {
-         axios.get(`http://127.0.0.1:8001/api/restaurant/type`,
+      getRestaurants() {
+         axios.get(`http://127.0.0.1:8000/api/restaurant/type`,
          {
             params: {
                "type_id[]" : this.checked
@@ -50,13 +43,13 @@ export default {
          })
          .then(response => {
             console.log(response.data);
-            this.restaurant = response.data.results;
+            this.restaurants = response.data.results;
+            this.lista = true;
          });
       }
    },
    mounted() {
       this.getTypes();
-      this.getRestaurant();
    }
 }
 </script>
@@ -67,7 +60,7 @@ export default {
       <div class="row g-3 py-3 justify-content-around">
          <div class="col-6 col-md-4 col-lg-3" v-for="(tipo, i) in types">
             <input :id="tipo.id" type="checkbox" class="d-none cecco" :value="tipo.id" name="type_id[]">
-            <label :id="'lable' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
+            <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
                <!-- <img :src="`../../public/${tipo.name}.jpg`" :alt="'Immagine ristorante ' + tipo.name"> -->
                <div class="centrato">
                   <h6 class="p-2">{{ tipo.name }}</h6>
@@ -77,9 +70,14 @@ export default {
       </div>
       <button type="submit" class="btn btn-success">Cerca</button>
    </form>
-   <div class="btn btn-primary" @click="lista = true">Lista</div>
+   <div class="btn btn-primary" @click="getRestaurants">Lista</div>
+
    <div class="lista" v-show="lista">
-      <h1>Qua ci sarà la lista dei ristoranti selezionati</h1>
+      <div class="d-flex justify-content-between" v-for="restaurant in restaurants">
+         <h2>{{ restaurant.name }}</h2>
+         <h5 v-for="tipo in restaurant.types">{{ tipo.name }}</h5>
+         <div class="btn"></div>
+      </div>
    </div>
 </template>
 
