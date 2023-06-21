@@ -1,11 +1,15 @@
 <script>
 import axios from 'axios';
+import { store } from '../store.js';
 import FoodModal from "../components/FoodModal.vue";
 
 export default {
    name: "AppRestaurant",
    data() {
       return {
+         store,
+         restaurant: [],
+         restaurantImage: "",
          foods: [],
          quantity: 0,
       }
@@ -14,34 +18,41 @@ export default {
       FoodModal
    },
    methods: {
+      getRestaurantImage(pathImg) {
+         // console.log(`${this.store.baseUrl}storage/${pathImg}`)
+         return new URL(`${this.store.baseUrl}storage/${pathImg}` , import.meta.url).href;
+      },
       getFoods(){
-         const restaurant_id = this.$route.params.id;
-         axios.get(`http://127.0.0.1:8000/api/foods/${restaurant_id}`)
+         const restaurant_slug = this.$route.params.slug;
+         axios.get(`${this.store.urlApi}foods/${restaurant_slug}`)
          .then(response => {
-            this.foods = response.data.results;
-            console.log(response.data.results)
+            this.restaurant = response.data.results;
+            this.restaurantImage = response.data.results.image;
+            this.foods = response.data.results.food;
+            // console.log(this.restaurant)
+            // console.log(this.foods)
          });
       }
    },
-   mounted() {
+   created() {
       this.getFoods();
    }
 }
 </script>
 
 <template>
-   <div id="hero" class="p-3 p-md-5 centrato">
+   <div id="hero" class="p-3 p-md-5 centrato" :style="{ backgroundImage: `url(${getRestaurantImage(restaurantImage)})` }">
       <div id="info-ristorante" class="p-2 p-md-3 text-white rounded-3">
-         <h3>Nome Ristorante</h3>
-         <h5>Indirizzo del ristorante</h5>
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore dolorum optio, recusandae vero itaque animi qui voluptates eveniet mollitia commodi facere voluptas nostrum aliquam vitae. Placeat voluptas id eligendi dolores!</p>
+         <h3>{{ restaurant.name }}</h3>
+         <h5>{{ restaurant.address }}</h5>
+         <p>{{ restaurant.description }}</p>
       </div>
    </div>
    <FoodModal/>
    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-6 g-3 py-3 justify-content-around">
       <div v-for="food in foods" class="col carta bg-white text-center">
          <div data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <img :src="`http://127.0.0.1:8000/storage/${food.image}`" :alt="'Immagine ristorante ' + food.name">
+            <img :src="`${this.store.baseUrl}storage/${food.image}`" :alt="'Immagine ristorante ' + food.name">
             <div class="centrato flex-column">
                <h6 class="p-2 m-0">{{ food.name }}</h6>
                <small>{{ food.price }} €</small>
@@ -64,7 +75,9 @@ export default {
 @use "../styles/general.scss";
 
 #hero{
-   background-image: url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.publicdomainpictures.net%2Fpictures%2F80000%2Fvelka%2Fshabu-shabu-food.jpg&f=1&nofb=1&ipt=d65d10e3a85c4f3db1b192cc526facd69178c8adc6149b2a6afd7d21ca4e43bd&ipo=images");
+   // background-image: url(`${this.store.baseUrl}storage/${restaurant.image}`);
+   background-size: cover;
+   background-position: center;
    height: 21rem;
    width: 100%;
 }

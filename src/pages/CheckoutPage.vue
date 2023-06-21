@@ -16,14 +16,10 @@ export default {
                });
             })
          });
-      },
-      changeFormValue(){
-         document.getElementById("credit-card-number").setAttribute("value", "4111111111111111")
       }
    },
    mounted() {
       this.brainTree()
-      // this.changeFormValue()
    }
 }
 </script>
@@ -83,10 +79,6 @@ export default {
 //brainTree
 .braintree-heading, .braintree-placeholder{
    display: none;
-}
-
-.braintree-form__field-group, .braintree-form-number {
-   width: 50% !important;
 }
 
 </style>

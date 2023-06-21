@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import { store } from '../store.js';
 import HeroHome from "../components/HeroHome.vue";
 
 export default {
@@ -9,6 +10,7 @@ export default {
    },
    data() {
       return {
+         store,
          types: [],
          checked:[],
          restaurants: [],
@@ -27,14 +29,14 @@ export default {
       },
       getTypes() {
          this.loading = true;
-         axios.get(`http://127.0.0.1:8000/api/types/`)
+         axios.get(`${this.store.urlApi}types/`)
          .then(response => {
             this.types = response.data.results;
          });
          
       },
       getRestaurants() {
-         axios.get(`http://127.0.0.1:8000/api/restaurant/type`,
+         axios.get(`${this.store.urlApi}restaurant/type`,
          {
             params: {
                "type_id[]" : this.checked
@@ -55,10 +57,10 @@ export default {
 <template>
    <HeroHome />
    <div class="row g-3 py-3 justify-content-around">
-      <div class="col-6 col-md-4 col-lg-3" v-for="(tipo, i) in types">
+      <div class="col-6 col-md-4 col-lg-3" v-for="tipo in types">
          <input :id="tipo.id" type="checkbox" class="d-none" :value="tipo.id" name="type_id[]">
          <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
-            <img :src="`http://127.0.0.1:8000/storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
+            <img :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
             <div class="centrato">
                <h6 class="p-2">{{ tipo.name }}</h6>
             </div>
@@ -72,10 +74,8 @@ export default {
          <h2>{{ restaurant.name }}</h2>
          <div>
             <span class="mx-2" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
-            <router-link :to="`/ristorante/${restaurant.id}`" class="nav-link logo">Menu</router-link>
-            <!-- <a class="btn btn-success my-2 p-1" :restaurant_id="restaurant.id">Menu</a> -->
+            <router-link :to="`/ristorante/${restaurant.slug}`" class="nav-link logo">Menu</router-link>
          </div>
-         
       </div>
    </div>
 </template>
