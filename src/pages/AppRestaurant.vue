@@ -26,9 +26,9 @@ export default {
          const restaurant_slug = this.$route.params.slug;
          axios.get(`${this.store.urlApi}foods/${restaurant_slug}`)
          .then(response => {
-            this.restaurant = response.data.results;
-            this.restaurantImage = response.data.results.image;
-            this.foods = response.data.results.food;
+            this.restaurant = response.data.results.restaurant;
+            this.restaurantImage = response.data.results.restaurant.image;
+            this.foods = response.data.results.foods;
             // console.log(this.restaurant)
             // console.log(this.foods)
          });
