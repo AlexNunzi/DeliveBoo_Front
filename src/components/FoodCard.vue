@@ -31,12 +31,45 @@ export default {
             quantity: 0,
             store,
             
+            
         }
 
     },
-    mounted (){
+    methods: {
+        testStorage(id){
+          let carrello= [];
+          //recuperiamo dal localstorage il valore della key dal carrellolocale che è una stringa
+           const carrelloPrecedente = localStorage.getItem('carrelloLocale');
+           console.log(carrelloPrecedente);
+           
+           if(carrelloPrecedente) {
+            //JSON.parse traduce la stringa da formato JSON in un array o oggetto o variabile di js
+             carrello = JSON.parse(carrelloPrecedente);
+           }
+            carrello.push(id);
+           
+           //JSON.stringify traduce l'arrey o la variabile di js in una stringa in formato JSON
+           localStorage.setItem('carrelloLocale',JSON.stringify(carrello));
+
+            
+        }
+
+    },
+     mounted (){
+        this.testStorage(this.foodObject.name);
        
     }
 }
 
 </script>
+
+<style scoped lang="scss">
+@use "../styles/general.scss";
+
+.carta img{
+   height: 10rem;
+   width: 100%;
+   object-fit: cover;
+}
+
+</style>

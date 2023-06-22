@@ -74,7 +74,7 @@ export default {
          <h2>{{ restaurant.name }}</h2>
          <div>
             <span class="mx-2" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
-            <router-link :to="`/ristorante/${restaurant.slug}`" class="nav-link logo">Menu</router-link>
+             <router-link :to="`/ristorante/${restaurant.slug}`" class="nav-link logo">Menu</router-link> 
          </div>
       </div>
    </div>

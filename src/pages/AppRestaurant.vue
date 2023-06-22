@@ -84,11 +84,7 @@ export default {
    overflow: hidden;
    width: 11rem;
 }
-.carta img{
-   height: 10rem;
-   width: 100%;
-   object-fit: cover;
-}
+
 
 #btn-cart{
    width: 60%;
