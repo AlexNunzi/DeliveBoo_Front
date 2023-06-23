@@ -29,6 +29,7 @@ export default {
     data() {
         return {
             quantity: 0,
+            index: null,
             store,
             
             
@@ -37,42 +38,31 @@ export default {
     },
     methods: {
         addToCart(){
-
-            let provaArrayOggetti = [];
-            provaArrayOggetti['esempio'] = {
-                    nome: 'paolo',
-                    professione: 'smadonnatore'
-                };
-
-         console.log(provaArrayOggetti['esempio']);
-        
-
+            console.log('indice:' + this.index);
             let carrello = [];
             const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
-
             if(carrelloPrecedente) {
-                carrello = JSON.parse(carrelloPrecedente);   
+                carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
             }
 
-            if(this.checkExists(this.foodObject.name, carrello)) {
+            console.log(carrello);
+
+            if(carrello[this.foodObject.slug]) {
                 console.log('esiste già');
-                carrello.forEach((cart, i) => {
-                    if(cart.name == this.foodObject.name){
-                        carrello[i].quantity++;
-                    }
-                });
-                localStorage.setItem('ilNostroCarrello', JSON.stringify(carrello));
+                carrello[this.foodObject.slug].quantity++;
+                localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
             } else {
                 console.log('non esiste');
-                carrello.push( {
+                carrello[this.foodObject.slug] = {
                     quantity: 1,
                     name: this.foodObject.name,
                     price: this.foodObject.price,
                     foodId: this.foodObject.id
-                });
-                localStorage.setItem('ilNostroCarrello', JSON.stringify(carrello));
+                };
+                this.index = carrello.length - 1;
+                localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
             }
-
+            this.updateQuantity();
         },
         checkExists(check,arr) {
             let found = false;
@@ -97,7 +87,20 @@ export default {
            
            //JSON.stringify traduce l'arrey o la variabile di js in una stringa in formato JSON
            localStorage.setItem('carrelloLocale',JSON.stringify(carrello));
+        },
+        updateQuantity() {
+            let carrello = [];
+            const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
+            if(carrelloPrecedente) {
+                carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
+            }
+            if(carrello[this.foodObject.slug]){
+                this.quantity = carrello[this.foodObject.slug].quantity;
+            }
         }
+    },
+    mounted() {
+        this.updateQuantity();
     }
 }
 
