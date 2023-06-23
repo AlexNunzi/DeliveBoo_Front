@@ -6,13 +6,13 @@
             <small>{{ foodObject.price }} €</small>
         </div>
     </div>
-    <div id="btn-cart" class="my-2 bg-warning" @click="quantity++" v-show="quantity < 1">
+    <div id="btn-cart" class="my-2 bg-warning" @click="addToCart()" v-show="quantity < 1">
         <i class="fa-brands fa-opencart"></i>
     </div>
     <div class="my-2" v-show="quantity >= 1">
-        <span class="px-2 bg-warning border rounded-circle" @click="quantity--">-</span>
+        <span class="px-2 bg-warning border rounded-circle" @click="removeToCart()">-</span>
         <span class="px-2 mx-2 border">{{ this.quantity }}</span>
-        <span class="px-2 bg-warning border rounded-circle" @click="quantity++">+</span>
+        <span class="px-2 bg-warning border rounded-circle" @click="addToCart()">+</span>
     </div> 
 
     
@@ -36,6 +36,53 @@ export default {
 
     },
     methods: {
+        addToCart(){
+
+            let provaArrayOggetti = [];
+            provaArrayOggetti['esempio'] = {
+                    nome: 'paolo',
+                    professione: 'smadonnatore'
+                };
+
+         console.log(provaArrayOggetti['esempio']);
+        
+
+            let carrello = [];
+            const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
+
+            if(carrelloPrecedente) {
+                carrello = JSON.parse(carrelloPrecedente);   
+            }
+
+            if(this.checkExists(this.foodObject.name, carrello)) {
+                console.log('esiste già');
+                carrello.forEach((cart, i) => {
+                    if(cart.name == this.foodObject.name){
+                        carrello[i].quantity++;
+                    }
+                });
+                localStorage.setItem('ilNostroCarrello', JSON.stringify(carrello));
+            } else {
+                console.log('non esiste');
+                carrello.push( {
+                    quantity: 1,
+                    name: this.foodObject.name,
+                    price: this.foodObject.price,
+                    foodId: this.foodObject.id
+                });
+                localStorage.setItem('ilNostroCarrello', JSON.stringify(carrello));
+            }
+
+        },
+        checkExists(check,arr) {
+            let found = false;
+            arr.forEach(e => {
+                if(e.name == check){
+                    found = true;
+                }
+            }); 
+            return found;
+        },
         testStorage(id){
           let carrello= [];
           //recuperiamo dal localstorage il valore della key dal carrellolocale che è una stringa
@@ -50,14 +97,7 @@ export default {
            
            //JSON.stringify traduce l'arrey o la variabile di js in una stringa in formato JSON
            localStorage.setItem('carrelloLocale',JSON.stringify(carrello));
-
-            
         }
-
-    },
-     mounted (){
-        this.testStorage(this.foodObject.name);
-       
     }
 }
 
