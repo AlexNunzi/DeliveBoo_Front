@@ -24,7 +24,8 @@ import { store } from '../store.js';
 export default {
     name: 'FoodCard',
     props: {
-        foodObject: Object
+        foodObject: Object,
+        restaurantSlug: String
     },
     data() {
         return {
@@ -55,11 +56,15 @@ export default {
             
             // Recupero da localStorage il riferimento al ristorante da cui sto ordinando
             let currentRestaurant = localStorage.getItem('currentRestaurant');
+            let currentSlug = localStorage.getItem('currentSlug');
+
             // Se non esiste già un riferimento ci salvo l'id del ristorante da cui sto ordinando
             if(!currentRestaurant) {
                 currentRestaurant = this.foodObject.restaurant_id;
+                currentSlug = this.restaurantSlug;
                 // E lo salvo nel localStorage
                 localStorage.setItem('currentRestaurant', currentRestaurant);
+                localStorage.setItem('currentSlug', currentSlug);
             }
 
             // Se è presente nel carrello una key uguale allo slug di food
