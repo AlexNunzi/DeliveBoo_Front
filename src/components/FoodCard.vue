@@ -10,7 +10,7 @@
         <i class="fa-brands fa-opencart"></i>
     </div>
     <div class="my-2" v-show="quantity >= 1">
-        <span class="px-2 bg-warning border rounded-circle" @click="removeToCart()">-</span>
+        <span class="px-2 bg-warning border rounded-circle" @click="removeFromCart()">-</span>
         <span class="px-2 mx-2 border">{{ this.quantity }}</span>
         <span class="px-2 bg-warning border rounded-circle" @click="addToCart()">+</span>
     </div> 
@@ -29,7 +29,6 @@ export default {
     data() {
         return {
             quantity: 0,
-            index: null,
             store,
             
             
@@ -38,7 +37,6 @@ export default {
     },
     methods: {
         addToCart(){
-            console.log('indice:' + this.index);
             let carrello = [];
             const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
             if(carrelloPrecedente) {
@@ -59,19 +57,25 @@ export default {
                     price: this.foodObject.price,
                     foodId: this.foodObject.id
                 };
-                this.index = carrello.length - 1;
                 localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
             }
             this.updateQuantity();
         },
-        checkExists(check,arr) {
-            let found = false;
-            arr.forEach(e => {
-                if(e.name == check){
-                    found = true;
-                }
-            }); 
-            return found;
+        removeFromCart(){
+            let carrello = [];
+            const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
+            if(carrelloPrecedente) {
+                carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
+            }
+
+            console.log(carrello);
+
+            if(carrello[this.foodObject.slug]) {
+                console.log('esiste già');
+                carrello[this.foodObject.slug].quantity--;
+                localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
+            }
+            this.updateQuantity();
         },
         testStorage(id){
           let carrello= [];
