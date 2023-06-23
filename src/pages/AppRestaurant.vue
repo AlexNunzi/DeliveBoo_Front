@@ -10,7 +10,7 @@ export default {
    data() {
       return {
          store,
-         restaurant: [],
+         restaurant: {},
          restaurantImage: "",
          foods: [],
         
@@ -35,6 +35,11 @@ export default {
             // console.log(this.restaurant)
             // console.log(this.foods)
          });
+      },
+      checkRestaurantId() {
+         let currentRestaurant = localStorage.getItem('currentRestaurant');
+         console.log(currentRestaurant == this.restaurant.id);
+         return currentRestaurant == this.restaurant.id;
       }
    },
    created() {
