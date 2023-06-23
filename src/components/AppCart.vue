@@ -5,10 +5,9 @@
    <div class="d-flex align-items-center">
       <div class="dropstart">
          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Qui viene </a></li>
-            <li><a class="dropdown-item" href="#">visualizzato </a></li>
-            <li><a class="dropdown-item" href="#">il carrello</a></li>
-            <li><a href="https://getbootstrap.com/docs/5.2/components/dropdowns/#forms">Oppure un form. cliccami</a></li>
+            <li>
+               {{ cart }}
+            </li>
          </ul>
       </div>
    </div>
@@ -18,7 +17,8 @@
 export default {
    data() {
       return {
-         count: 0
+         count: 0,
+         cart: []
       }
    },
    methods: {
@@ -28,24 +28,36 @@ export default {
             const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
             // Se esiste lo restituisco
             if(carrelloPrecedente) {
-                // Riconverto l'oggetto carrello in un array di oggetti
-                carrello = JSON.parse(carrelloPrecedente);
-               console.log(carrello)
+               carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
+               for(const food in carrello){
+                  this.cart.push(carrello[food]);
+               }
             }
 
-         if (Object.keys(carrello).length == 0) {
+         if (this.cart.length == 0) {
             this.count=0;
          } else {
             // Altrimenti aggiorno i dati precedentemente salvati
             let conteggio = null;
 
-            carrello.forEach(food => conteggio += food.quantity);
+            this.cart.forEach(food => conteggio += food.quantity);
             this.count = conteggio;
          }
+      },
+      loadCart() {
+            // Controllo se esiste già un carrello nel localStorage
+            const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
+            // Se esiste lo restituisco
+            if(carrelloPrecedente) {
+                // Riconverto l'oggetto carrello in un array di oggetti
+                this.cart = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
+                // Altrimenti restituisco un array vuoto
+            } 
       }
    },
    mounted(){
       this.CheckCart();
+      this.loadCart();
    }
 }
 </script>
