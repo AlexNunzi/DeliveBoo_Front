@@ -52,6 +52,15 @@ export default {
         addToCart(){
             // Recupero i dati dal localStorage se esistono
             let carrello = this.checkLocalCart();
+            
+            // Recupero da localStorage il riferimento al ristorante da cui sto ordinando
+            let currentRestaurant = localStorage.getItem('currentRestaurant');
+            // Se non esiste già un riferimento ci salvo l'id del ristorante da cui sto ordinando
+            if(!currentRestaurant) {
+                currentRestaurant = this.foodObject.restaurant_id;
+                // E lo salvo nel localStorage
+                localStorage.setItem('currentRestaurant', currentRestaurant);
+            }
 
             // Se è presente nel carrello una key uguale allo slug di food
             if(carrello[this.foodSlug]) {
@@ -85,8 +94,17 @@ export default {
                 if(carrello[this.foodSlug].quantity == 0) {
                     delete carrello[this.foodSlug];
                 }
-                // E salvo nel localStorage
-                localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
+                if(carrello.length) {
+                    currentRestaurant = this.foodObject.restaurant_id;
+                    localStorage.setItem('currentRestaurant', currentRestaurant);
+                }
+                // Se il carrello è vuoto pulisco il localStorage
+                if(Object.keys(carrello).length == 0) {
+                    localStorage.clear();
+                } else {
+                    // Altrimenti aggiorno i dati precedentemente salvati
+                    localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
+                }
             }
             // Aggiorno la proprietà quantiti all'interno di data di questo component
             this.updateQuantity();
