@@ -30,76 +30,78 @@ export default {
         return {
             quantity: 0,
             store,
-            
-            
+            foodSlug: this.foodObject.slug
         }
 
     },
     methods: {
-        addToCart(){
-            let carrello = [];
+        // Inizializzo il carrello
+        checkLocalCart(){
+            // Controllo se esiste già un carrello nel localStorage
             const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
+            // Se esiste lo restituisco
             if(carrelloPrecedente) {
-                carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
+                // Riconverto l'oggetto carrello in un array di oggetti
+                return Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
+                // Altrimenti restituisco un array vuoto
+            } else {
+                return [];
             }
+        },
+        // Aggiunta food al carrello
+        addToCart(){
+            // Recupero i dati dal localStorage se esistono
+            let carrello = this.checkLocalCart();
 
-            console.log(carrello);
-
-            if(carrello[this.foodObject.slug]) {
-                console.log('esiste già');
-                carrello[this.foodObject.slug].quantity++;
+            // Se è presente nel carrello una key uguale allo slug di food
+            if(carrello[this.foodSlug]) {
+                // Aggiungo uno alla sua proprietà quantity
+                carrello[this.foodSlug].quantity++;
+                // E lo salvo
                 localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
             } else {
-                console.log('non esiste');
-                carrello[this.foodObject.slug] = {
+                // Altrimenti aggiungo all'array un nuovo oggetto la cui key è uguale allo slug di food
+                carrello[this.foodSlug] = {
                     quantity: 1,
                     name: this.foodObject.name,
                     price: this.foodObject.price,
                     foodId: this.foodObject.id
                 };
+                // E lo salvo nel localStorage
                 localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
             }
+            // Aggiorno la proprietà quantiti all'interno di data di questo component
             this.updateQuantity();
         },
+        // Rimozione food da carrello
         removeFromCart(){
-            let carrello = [];
-            const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
-            if(carrelloPrecedente) {
-                carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
-            }
-
-            console.log(carrello);
-
-            if(carrello[this.foodObject.slug]) {
-                console.log('esiste già');
-                carrello[this.foodObject.slug].quantity--;
+            // Recupero i dati dal localStorage se esistono
+            let carrello = this.checkLocalCart();
+            // Se è presente nel carrello una key uguale allo slug di food
+            if(carrello[this.foodSlug]) {
+                // Faccio -1 alla sua proprietà quantity
+                carrello[this.foodSlug].quantity--;
+                // Se la sua proprietà quantity è uguale a 0 cancello la coppia chiave-valore la cui key è uguale allo slug
+                if(carrello[this.foodSlug].quantity == 0) {
+                    delete carrello[this.foodSlug];
+                }
+                // E salvo nel localStorage
                 localStorage.setItem('ilNostroCarrello', JSON.stringify({...carrello}));
             }
+            // Aggiorno la proprietà quantiti all'interno di data di questo component
             this.updateQuantity();
         },
-        testStorage(id){
-          let carrello= [];
-          //recuperiamo dal localstorage il valore della key dal carrellolocale che è una stringa
-           const carrelloPrecedente = localStorage.getItem('carrelloLocale');
-           console.log(carrelloPrecedente);
-           
-           if(carrelloPrecedente) {
-            //JSON.parse traduce la stringa da formato JSON in un array o oggetto o variabile di js
-             carrello = JSON.parse(carrelloPrecedente);
-           }
-            carrello.push(id);
-           
-           //JSON.stringify traduce l'arrey o la variabile di js in una stringa in formato JSON
-           localStorage.setItem('carrelloLocale',JSON.stringify(carrello));
-        },
+        // Aggiorno proprietà quantity
         updateQuantity() {
-            let carrello = [];
-            const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
-            if(carrelloPrecedente) {
-                carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
-            }
-            if(carrello[this.foodObject.slug]){
-                this.quantity = carrello[this.foodObject.slug].quantity;
+            // Recupero i dati dal localStorage se esistono
+            let carrello = this.checkLocalCart();
+            // Se è presente nel carrello una key uguale allo slug di food
+            if(carrello[this.foodSlug]){
+                // Assegno alla proprietà quantity all'interno di data di questo component il valore di quantity contenuto nel carrello
+                this.quantity = carrello[this.foodSlug].quantity;
+            } else {
+                // Altrimenti la setto a zero
+                this.quantity = 0;
             }
         }
     },
