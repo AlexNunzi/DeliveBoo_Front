@@ -1,12 +1,9 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
+import { router } from '../router';
 import FoodModal from "../components/FoodModal.vue";
 import FoodCard from "../components/FoodCard.vue";
-import { router } from '../router';
-
-
-
 
 export default {
    name: "AppRestaurant",
@@ -25,8 +22,13 @@ export default {
    },
    methods: {
       getRestaurantImage(pathImg) {
-         // console.log(`${this.store.baseUrl}storage/${pathImg}`)
          return new URL(`${this.store.baseUrl}storage/${pathImg}`, import.meta.url).href;
+      },
+      modalShow() {
+         let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+         if (!this.checkRestaurantId() && localStorage.getItem('currentRestaurant') != null) {
+            modal.show();
+         }
       },
       getFoods() {
          const restaurant_slug = this.$route.params.slug;
@@ -36,23 +38,14 @@ export default {
                this.restaurantImage = response.data.results.restaurant.image;
                this.foods = response.data.results.foods;
                this.modalShow();
-
-               // console.log(this.restaurant)
-               // console.log(this.foods)
             });
       },
       checkRestaurantId() {
          let currentRestaurant = localStorage.getItem('currentRestaurant');
          return currentRestaurant == this.restaurant.id;
       },
-      modalShow() {
-         let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-         if (!this.checkRestaurantId() && localStorage.getItem('currentRestaurant') != null) {
-            modal.show();
-         }
-      },
       changeRestaurant() {
-         router.push({name: 'restaurant', params: {slug: this.restaurantSlug}})
+         router.push({ name: 'restaurant', params: { slug: this.restaurantSlug } })
       },
       resetLocal() {
          localStorage.clear();
@@ -60,16 +53,12 @@ export default {
    },
    created() {
       this.getFoods();
-
       this.$watch(
-            () => this.$route.params,
-            (toParams, previousParams) => {
-                this.getFoods();
-            }
-            )
-   },
-   mounted() {
-
+         () => this.$route.params,
+         (toParams, previousParams) => {
+            this.getFoods();
+         }
+      )
    }
 }
 </script>
@@ -86,15 +75,15 @@ export default {
                <p>Il tuo carrello ha già prodotti di un altro ristorante!</p>
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="backToRestaurant" @click="changeRestaurant()">Torna al ristorante precedente</button> 
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="backToRestaurant"
+                  @click="changeRestaurant()">Torna al ristorante precedente</button>
                <span>Oppure</span>
-               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="resetLocal()">Svuota il carrello</button>
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="resetLocal()">Svuota il
+                  carrello</button>
             </div>
          </div>
       </div>
    </div>
-
-
    <div id="hero" class="p-3 p-md-5 centrato" :style="{ backgroundImage: `url(${getRestaurantImage(restaurantImage)})` }">
       <div id="info-ristorante" class="p-2 p-md-3 text-white rounded-3">
          <h3>{{ restaurant.name }}</h3>
@@ -107,7 +96,6 @@ export default {
       <div v-for="food in foods" class="col carta bg-white text-center">
          <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug" />
       </div>
-
    </div>
 </template>
 
@@ -116,7 +104,6 @@ export default {
 @use "../styles/general.scss";
 
 #hero {
-   // background-image: url(`${this.store.baseUrl}storage/${restaurant.image}`);
    background-size: cover;
    background-position: center;
    height: 21rem;
@@ -134,7 +121,6 @@ export default {
    width: 11rem;
 }
 
-
 #btn-cart {
    width: 60%;
    border-radius: 5rem;
@@ -151,6 +137,5 @@ export default {
    .carta {
       width: 11rem;
    }
-
 }
 </style>

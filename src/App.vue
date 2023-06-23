@@ -7,11 +7,6 @@ export default {
    components: {
       AppHeader,
       AppFooter
-   },
-   data() {
-      return {
-
-      }
    }
 }
 </script>

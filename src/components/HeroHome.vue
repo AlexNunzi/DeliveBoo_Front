@@ -1,14 +1,6 @@
 <script>
 export default {
    name: "HeroHome",
-   data() {
-      return {
-
-      }
-   },
-   methods: {
-      
-   }
 }
 </script>
 

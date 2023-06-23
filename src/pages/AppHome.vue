@@ -68,13 +68,12 @@ export default {
       </div>
    </div>
    <div class="btn btn-primary" @click="getRestaurants">Lista</div>
-
    <div class="lista" v-show="lista">
       <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
          <h2>{{ restaurant.name }}</h2>
-         <div>
-            <span class="mx-2" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
-             <router-link :to="`/ristorante/${restaurant.slug}`" class="nav-link logo">Menu</router-link> 
+         <div class="d-flex align-items-center">
+            <span class="mx-2 bg-white" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
+            <router-link :to="`/ristorante/${restaurant.slug}`" class="btn btn-success">Menu</router-link> 
          </div>
       </div>
    </div>
