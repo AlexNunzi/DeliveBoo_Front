@@ -4,7 +4,6 @@ import { store } from '../store.js';
 import { router } from '../router';
 import FoodModal from "../components/FoodModal.vue";
 import FoodCard from "../components/FoodCard.vue";
-import { router } from '../router';
 
 export default {
    name: "AppRestaurant",
