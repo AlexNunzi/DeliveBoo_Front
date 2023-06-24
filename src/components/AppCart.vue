@@ -1,52 +1,35 @@
-<script>
-import { toRaw } from 'vue';
+<template>
+   <i class="fa-brands fa-opencart position-relative" data-bs-toggle="dropdown">
+      <span class="fw-lighter position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ this.store.quantityCounter }}</span>
+   </i>
+   <div class="d-flex align-items-center">
+      <div class="dropstart">
+         <ul class="dropdown-menu p-3">
+            <li>
+               <OrderTable />
+            </li>
+         </ul>
+      </div>
+   </div>
+</template>
 
+<script>
+import {store} from '../store.js';
+import CartItem from './CartItem.vue';
+import OrderTable from './OrderTable.vue';
 export default {
    name: "AppCart",
    data() {
       return {
-         count: 0,
-         cart: []
+         store
       }
    },
-   methods: {
-      checkCart() {
-         let carrello = [];
-            // Controllo se esiste già un carrello nel localStorage
-            const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
-            // Se esiste lo restituisco
-            if(carrelloPrecedente) {
-               carrello = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
-               for(const food in carrello){
-                  this.cart.push(carrello[food]);
-               }
-            }
-         if (this.cart.length == 0) {
-            this.count=0;
-         } else {
-            // Altrimenti aggiorno i dati precedentemente salvati
-            this.cart.forEach(food => this.count += food.quantity);
-            
-            console.log(toRaw(this.cart))
-            console.log("il conto è: " + this.count)
-         }
-      },
-      loadCart() {
-         // Controllo se esiste già un carrello nel localStorage
-         const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
-         // Se esiste lo restituisco
-         if(carrelloPrecedente) {
-               // Riconverto l'oggetto carrello in un array di oggetti
-            this.cart = Object.entries(JSON.parse(carrelloPrecedente)).reduce((arr, [key, value]) => (arr[key] = value,arr), []);
-         } 
-      },
-      clearCart() {
-         localStorage.clear();
-      }
+   components: {
+      CartItem,
+      OrderTable
    },
    mounted(){
-      this.checkCart();
-      this.loadCart();
+      this.store.cartCounterRefresh();
    }
 }
 </script>

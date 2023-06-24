@@ -1,6 +1,16 @@
 <script>
+import {store} from '../store.js';
+import OrderTable from '../components/OrderTable.vue';
 export default {
    name: "CheckoutPage",
+   data() {
+      return {
+         store
+      }
+   },
+   components: {
+      OrderTable
+   },
    methods: {
       brainTree() {
          
@@ -25,10 +35,10 @@ export default {
 </script>
 
 <template>
-   <div class="m-5">
-      <h1 class="display-3 fw-bold text-center border">QUA CI SARÀ IL RIEPILOGO DELL'ORDINE</h1>
+   <div class="pt-5">
+      <OrderTable />
    </div>
-   <div class="row row-cols-md-2">
+   <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2">
       <!-- <form id="payment-form" action="/success" method="get">
          <div id="dropin-container"></div>
          <input type="submit" />
@@ -71,8 +81,6 @@ export default {
    </div>
 </template>
 
-
-
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
@@ -80,5 +88,4 @@ export default {
 .braintree-heading, .braintree-placeholder{
    display: none;
 }
-
 </style>

@@ -4,6 +4,7 @@ import { store } from '../store.js';
 import { router } from '../router';
 import FoodModal from "../components/FoodModal.vue";
 import FoodCard from "../components/FoodCard.vue";
+import { router } from '../router';
 
 export default {
    name: "AppRestaurant",
@@ -45,20 +46,17 @@ export default {
          return currentRestaurant == this.restaurant.id;
       },
       changeRestaurant() {
-         router.push({ name: 'restaurant', params: { slug: this.restaurantSlug } })
-      },
-      resetLocal() {
-         localStorage.clear();
+         router.push({name: 'restaurant', params: {slug: this.restaurantSlug}})
       }
    },
    created() {
       this.getFoods();
       this.$watch(
-         () => this.$route.params,
-         (toParams, previousParams) => {
-            this.getFoods();
-         }
-      )
+            () => this.$route.params,
+            (toParams, previousParams) => {
+                this.getFoods();
+            }
+            )
    }
 }
 </script>
@@ -78,12 +76,12 @@ export default {
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="backToRestaurant"
                   @click="changeRestaurant()">Torna al ristorante precedente</button>
                <span>Oppure</span>
-               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="resetLocal()">Svuota il
-                  carrello</button>
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="store.resetLocal()">Svuota il carrello</button>
             </div>
          </div>
       </div>
    </div>
+
    <div id="hero" class="p-3 p-md-5 centrato" :style="{ backgroundImage: `url(${getRestaurantImage(restaurantImage)})` }">
       <div id="info-ristorante" class="p-2 p-md-3 text-white rounded-3">
          <h3>{{ restaurant.name }}</h3>
@@ -98,7 +96,6 @@ export default {
       </div>
    </div>
 </template>
-
 
 <style lang="scss" scoped>
 @use "../styles/general.scss";
@@ -127,9 +124,7 @@ export default {
    margin: auto;
 }
 
-
 @media all and (min-width: 768px) {}
-
 
 @media all and (min-width: 480px) {}
 
