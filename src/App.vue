@@ -1,17 +1,21 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
+import EmptyCart from "./components/EmptyCart.vue";
+
 
 export default {
    name: "App.vue",
    components: {
       AppHeader,
-      AppFooter
+      AppFooter,
+      EmptyCart
    }
 }
 </script>
 
 <template>
+   <EmptyCart/>
    <div class="debug">
       <AppHeader />
       <div class="container bg-warning">

@@ -18,7 +18,7 @@ export default {
    },
    components: {
       FoodModal,
-      FoodCard
+      FoodCard,
    },
    methods: {
       getRestaurantImage(pathImg) {
@@ -51,11 +51,11 @@ export default {
    created() {
       this.getFoods();
       this.$watch(
-            () => this.$route.params,
-            (toParams, previousParams) => {
-                this.getFoods();
-            }
-            )
+         () => this.$route.params,
+         (toParams, previousParams) => {
+            this.getFoods();
+         }
+      )
    }
 }
 </script>

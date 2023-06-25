@@ -1,3 +1,19 @@
+<script>
+import {store} from '../store.js';
+import CartItem from './CartItem.vue';
+export default {
+   name: 'OrderTable',
+   data() {
+      return {
+         store
+      }
+   },
+   components: {
+      CartItem
+   }
+}
+</script>
+
 <template>
    <table class="table table-striped p-3">
       <thead>
@@ -24,11 +40,9 @@
          </tr>
          <tr v-if="this.$route.name != 'checkout'">
             <th scope="row"></th>
-            <td></td>
+            <td><button type="button" class="btn btn-danger p-1" data-bs-toggle="modal" data-bs-target="#CartModal">Svuota carrello</button></td>
             <td>
-               <router-link :to="{ name: 'checkout' }" class="btn btn-primary">
-                  Vai al pagamento
-               </router-link>
+               <router-link :to="{ name: 'checkout' }" class="btn btn-primary">Vai al pagamento</router-link>
             </td>
          </tr>
       </tbody>
@@ -42,31 +56,13 @@
             <td></td>
             <td class="text-center">
                Il carrello è vuoto, se vuoi...
-               <router-link :to="{ name: 'home' }" class="btn btn-primary">
-                  Torna alla pagina dei ristoranti
-               </router-link>
+               <router-link :to="{ name: 'home' }" class="btn btn-primary">Torna alla pagina dei ristoranti</router-link>
             </td>
             <td></td>
          </tr>
       </tbody>
    </table>
 </template>
-
-<script>
-import {store} from '../store.js';
-import CartItem from './CartItem.vue';
-export default {
-   name: 'OrderTable',
-   data() {
-      return {
-         store
-      }
-   },
-   components: {
-      CartItem
-   }
-}
-</script>
 
 <style lang="scss">
 @use "../styles/general.scss";

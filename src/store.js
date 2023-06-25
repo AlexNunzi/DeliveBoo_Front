@@ -42,9 +42,9 @@ export const store = reactive ({
       const carrelloPrecedente = localStorage.getItem('ilNostroCarrello');
       // Se esiste lo salvo nello store
       if(carrelloPrecedente) {
-          // Dopo averlo riconvertito da formato JSON a variabile JS (in questo caso un oggetto)
-          this.cart = JSON.parse(carrelloPrecedente);
-          // Altrimenti salvo nello store un oggetto vuoto
+         // Dopo averlo riconvertito da formato JSON a variabile JS (in questo caso un oggetto)
+         this.cart = JSON.parse(carrelloPrecedente);
+         // Altrimenti salvo nello store un oggetto vuoto
       } else {
          this.cart = {};
       }
@@ -65,42 +65,42 @@ export const store = reactive ({
       }
       // Se è presente nel carrello una key uguale allo slug di food
       if(this.cart[food.slug]) {
-          // Aggiungo uno alla sua proprietà quantity
-          this.cart[food.slug].quantity++;
-          // E lo salvo
-          localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));
+         // Aggiungo uno alla sua proprietà quantity
+         this.cart[food.slug].quantity++;
+         // E lo salvo
+         localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));
       } else {
           // Altrimenti aggiungo all'oggetto un nuovo oggetto la cui key è uguale allo slug di food
-          this.cart[food.slug] = {
-              quantity: 1,
-              name: food.name,
-              slug: food.slug,
-              price: food.price,
-              foodId: food.id
-          };
-          // E lo salvo nel localStorage
-          localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));
+         this.cart[food.slug] = {
+            quantity: 1,
+            name: food.name,
+            slug: food.slug,
+            price: food.price,
+            foodId: food.id
+         };
+         // E lo salvo nel localStorage
+         localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));
       }
       // Poi aggiorno i contatori di quantità totale e prezzo totale nello store
       this.cartCounterRefresh();
-  },
+   },
    // Rimozione di un food dal carrello
    removeFromCart(food){
       // Se è presente nel carrello una key uguale allo slug di food
       if(this.cart[food.slug]) {
-            // Faccio -1 alla sua proprietà quantity
-            this.cart[food.slug].quantity--;
-            // Se la sua proprietà quantity è uguale a 0 cancello la coppia chiave-valore la cui key è uguale allo slug
-            if(this.cart[food.slug].quantity == 0) {
-               delete this.cart[food.slug];
-            }
-            // Se il carrello è vuoto pulisco il localStorage
-            if(this.cartIsEmpty()) {
-               localStorage.clear();
-            } else {
-               // Altrimenti aggiorno i dati precedentemente salvati
-               localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));
-            }
+         // Faccio -1 alla sua proprietà quantity
+         this.cart[food.slug].quantity--;
+         // Se la sua proprietà quantity è uguale a 0 cancello la coppia chiave-valore la cui key è uguale allo slug
+         if(this.cart[food.slug].quantity == 0) {
+            delete this.cart[food.slug];
+         }
+         // Se il carrello è vuoto pulisco il localStorage
+         if(this.cartIsEmpty()) {
+            localStorage.clear();
+         } else {
+            // Altrimenti aggiorno i dati precedentemente salvati
+            localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));
+         }
       }
       // Poi aggiorno i contatori di quantità totale e prezzo totale nello store
       this.cartCounterRefresh();

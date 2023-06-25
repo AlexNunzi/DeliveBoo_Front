@@ -6,7 +6,7 @@ import HeroHome from "../components/HeroHome.vue";
 export default {
    name: "AppHome",
    components: {
-      HeroHome
+      HeroHome,
    },
    data() {
       return {
@@ -15,6 +15,7 @@ export default {
          checked:[],
          restaurants: [],
          lista: false,
+         none: false,
       }
    },
    methods: {
@@ -44,7 +45,18 @@ export default {
          })
          .then(response => {
             this.restaurants = response.data.results;
-            this.lista = true;
+            // catch(err) 
+            console.log(this.restaurants)
+
+            if(this.restaurants){
+               this.lista = true;
+
+            } else if (this.restaurants.length == 0 ) {
+               this.none = true
+               console.log(response)
+            
+
+            }
          });
       }
    },
@@ -68,6 +80,8 @@ export default {
       </div>
    </div>
    <div class="btn btn-primary" @click="getRestaurants">Lista</div>
+   <h1>Seleziona almeno una tipologia</h1>
+   <h1 v-show="none">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
    <div class="lista" v-show="lista">
       <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
          <h2>{{ restaurant.name }}</h2>

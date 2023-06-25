@@ -1,6 +1,7 @@
 <script>
 import {store} from '../store.js';
 import OrderTable from '../components/OrderTable.vue';
+
 export default {
    name: "CheckoutPage",
    data() {
@@ -9,7 +10,7 @@ export default {
       }
    },
    components: {
-      OrderTable
+      OrderTable,
    },
    methods: {
       brainTree() {
@@ -72,9 +73,9 @@ export default {
          <ul>
             <li>Visa: 4111111111111111</li>
             <li>Mastercard: 5555555555554444</li>
-            <li>American Express: 378282246310005</li>
+            <!-- <li>American Express: 378282246310005</li>
             <li>Discover: 6011111111111117</li>
-            <li>JCB: 3530111333300000</li>
+            <li>JCB: 3530111333300000</li> -->
          </ul>
          <p>data: 01/25</p>
       </div>
@@ -85,7 +86,7 @@ export default {
 @use "../styles/general.scss";
 
 //brainTree
-.braintree-heading, .braintree-placeholder{
+.braintree-heading, .braintree-placeholder, .braintree-sheet__header .braintree-sheet__header-label{
    display: none;
 }
 </style>
