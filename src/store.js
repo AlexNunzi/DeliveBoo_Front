@@ -6,6 +6,7 @@ export const store = reactive ({
    totalPrice: 0,
    quantityCounter: 0,
    cart: {},
+   clientBraintreeToken: '',
    // Controllo se il carrello non è vuoto
    cartIsEmpty(){
       if(Object.keys(this.cart).length == 0){
