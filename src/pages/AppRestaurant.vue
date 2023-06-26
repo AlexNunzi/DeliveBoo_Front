@@ -38,6 +38,8 @@ export default {
                this.restaurantImage = response.data.results.restaurant.image;
                this.foods = response.data.results.foods;
                this.modalShow();
+            }).catch(error => {
+               router.push({name: 'not-found'});
             });
       },
       checkRestaurantId() {
@@ -82,7 +84,7 @@ export default {
    </div>
 
    <div id="hero" class="p-3 p-md-5 centrato" :style="{ backgroundImage: `url(${getRestaurantImage(restaurantImage)})` }">
-      <div id="info-ristorante" class="p-2 p-md-3 text-white rounded-3">
+      <div v-if="restaurant" id="info-ristorante" class="p-2 p-md-3 text-white rounded-3">
          <h3>{{ restaurant.name }}</h3>
          <h5>{{ restaurant.address }}</h5>
          <p>{{ restaurant.description }}</p>
