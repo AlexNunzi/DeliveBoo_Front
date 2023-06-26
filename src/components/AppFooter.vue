@@ -13,8 +13,10 @@ export default {
 </script>
 
 <template>
-   <div class="container bg-black text-white p-5">
-      <h1>Sono AppFooter</h1>
+   <div class="bg-black text-white p-5">
+      <div id="footer" class="container">
+         <h1>Sono AppFooter</h1>
+      </div>
    </div>
 </template>
 

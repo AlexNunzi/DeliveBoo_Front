@@ -17,17 +17,17 @@ export default {
 <template>
     <div data-bs-toggle="modal" data-bs-target="#exampleModal">
         <img :src="`${this.store.baseUrl}storage/${foodObject.image}`" :alt="'Immagine ristorante ' + foodObject.name">
-        <div class="centrato flex-column">
-            <h6 class="p-2 m-0">{{ foodObject.name }}</h6>
-            <small>{{ foodObject.price }} €</small>
+        <div class="centrato my-1">
+            <h6 class="p-2">{{ foodObject.name }}</h6>
         </div>
+            <small>{{ foodObject.price }} €</small>
     </div>
-    <div class="my-2" v-if="store.cart[foodObject.slug]">
+    <div class="my-2 pt-1" v-if="store.cart[foodObject.slug]">
         <span class="px-2 bg-warning border rounded-circle" @click="store.removeFromCart(foodObject)">-</span>
         <span class="px-2 mx-2 border">{{ store.cart[foodObject.slug].quantity }}</span>
         <span class="px-2 bg-warning border rounded-circle" @click="store.addToCart(foodObject, restaurantSlug)">+</span>
     </div> 
-    <div id="btn-cart" class="my-2 bg-warning" @click="store.addToCart(foodObject, restaurantSlug)" v-else>
+    <div id="btn-cart" class="my-2 mx-5 p-1 bg-warning rounded-5" @click="store.addToCart(foodObject, restaurantSlug)" v-else>
         <i class="fa-brands fa-opencart"></i>
     </div>
 </template>
@@ -39,6 +39,10 @@ export default {
     height: 10rem;
     width: 100%;
     object-fit: cover;
+}
+
+.centrato{
+    height: 4rem;
 }
 
 </style>

@@ -72,26 +72,26 @@ export default {
 
 <template>
    <HeroHome />
-   <div class="row g-3 py-3 justify-content-around">
-      <div class="col-6 col-md-4 col-lg-3" v-for="tipo in types">
-         <input :id="tipo.id" type="checkbox" class="d-none" :value="tipo.id" name="type_id[]">
-         <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
-            <img :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
-            <div class="centrato">
-               <h6 class="p-2">{{ tipo.name }}</h6>
-            </div>
-         </label>
+   <div class="container-xxl">
+      <div class="row g-3 py-3 justify-content-around">
+         <div class="col-6 col-md-5 col-xl-4 col-xxl-3" v-for="tipo in types">
+            <input :id="tipo.id" type="checkbox" class="d-none" :value="tipo.id" name="type_id[]">
+            <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
+               <img :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
+               <h4 class="p-2 centrato flex-grow-1">{{ tipo.name }}</h4>
+            </label>
+         </div>
       </div>
-   </div>
-   <div class="btn btn-primary" @click="getRestaurants">Lista</div>
-   <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
-   <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
-   <div class="lista" v-if="lista">
-      <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
-         <h2>{{ restaurant.name }}</h2>
-         <div class="d-flex align-items-center">
-            <span class="mx-2 bg-white" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
-            <router-link :to="`/ristorante/${restaurant.slug}`" class="btn btn-success">Menu</router-link> 
+      <a href="#footer" class="btn btn-primary" @click="getRestaurants">Cerca</a>
+      <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
+      <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
+      <div id="lista" class="py-4 bg-success" v-if="lista">
+         <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
+            <h2>{{ restaurant.name }}</h2>
+            <div class="d-flex align-items-center">
+               <span class="mx-2 bg-white" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
+               <router-link :to="`/ristorante/${restaurant.slug}`" class="btn btn-success">Menu</router-link> 
+            </div>
          </div>
       </div>
    </div>
@@ -151,7 +151,7 @@ h6 {
 img {
    height: 8rem;
    width: 8rem;
-   object-fit: fill;
+   object-fit: cover;
 }
 
 

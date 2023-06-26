@@ -21,9 +21,12 @@ export default {
 </script>
 
 <template>
-   <i class="fa-brands fa-opencart position-relative" data-bs-toggle="dropdown">
-      <span class="fw-lighter position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ this.store.quantityCounter }}</span>
-   </i>
+   <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="dropdown">
+      <div>
+         <i class="fa-brands fa-opencart position-relative"></i>
+      </div>
+      <div class="ps-2 fw-bold">{{ this.store.quantityCounter }}</div>
+   </div>
    <div class="d-flex align-items-center">
       <div class="dropstart">
          <ul class="dropdown-menu p-3">
@@ -35,6 +38,10 @@ export default {
    </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use "../styles/general.scss";
+
+td{
+   vertical-align: middle;
+}
 </style>
