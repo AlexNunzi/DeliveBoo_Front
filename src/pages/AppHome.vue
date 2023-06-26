@@ -15,7 +15,8 @@ export default {
          checked:[],
          restaurants: [],
          lista: false,
-         none: false,
+         noSelected: false,
+         noResults: false
       }
    },
    methods: {
@@ -37,27 +38,30 @@ export default {
          
       },
       getRestaurants() {
-         axios.get(`${this.store.urlApi}restaurant/type`,
-         {
-            params: {
-               "type_id[]" : this.checked
-            }
-         })
-         .then(response => {
-            this.restaurants = response.data.results;
-            // catch(err) 
-            console.log(this.restaurants)
-
-            if(this.restaurants){
+         this.noResults = false;
+         this.noSelected = false;
+         if (this.checked.length != 0) {
+            axios.get(`${this.store.urlApi}restaurant/type`,
+            {
+               params: {
+                  "type_id[]" : this.checked
+               }
+            })
+            .then(response => {
+               this.restaurants = response.data.results; 
                this.lista = true;
-
-            } else if (this.restaurants.length == 0 ) {
-               this.none = true
-               console.log(response)
-            
-
-            }
-         });
+               if (this.restaurants.length == 0) {
+                  this.noResults = true 
+               }
+               
+            }).catch ((error) => {   
+               if (error) {
+                  this.noResults = true 
+               }      
+            })
+         } else {
+            this.noSelected = true
+         }
       }
    },
    mounted() {
@@ -80,9 +84,9 @@ export default {
       </div>
    </div>
    <div class="btn btn-primary" @click="getRestaurants">Lista</div>
-   <h1>Seleziona almeno una tipologia</h1>
-   <h1 v-show="none">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
-   <div class="lista" v-show="lista">
+   <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
+   <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
+   <div class="lista" v-if="lista">
       <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
          <h2>{{ restaurant.name }}</h2>
          <div class="d-flex align-items-center">

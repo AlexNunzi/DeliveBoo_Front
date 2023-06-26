@@ -40,9 +40,9 @@ export default {
          </tr>
          <tr v-if="this.$route.name != 'checkout'">
             <th scope="row"></th>
-            <td><button type="button" class="btn btn-danger p-1" data-bs-toggle="modal" data-bs-target="#CartModal">Svuota carrello</button></td>
+            <td><button type="button" class="btn btn-danger p-1" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button></td>
             <td>
-               <router-link :to="{ name: 'checkout' }" class="btn btn-primary">Vai al pagamento</router-link>
+               <!-- <router-link :to="{ name: 'checkout' }" class="btn btn-primary">Vai al pagamento</router-link> -->
             </td>
          </tr>
       </tbody>
