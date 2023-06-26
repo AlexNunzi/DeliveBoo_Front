@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-   <table class="table table-striped p-3">
+   <table class="table table-striped p-3" v-if="!store.cartIsEmpty()">
       <thead>
          <tr>
             <th scope="col">Piatto</th>
@@ -23,7 +23,7 @@ export default {
             <th scope="col">Prezzo</th>
          </tr>
       </thead>
-      <tbody v-if="!store.cartIsEmpty()">
+      <tbody>
          <tr v-for="cart in store.cart">
             <CartItem
                :foodObject="cart"
@@ -35,7 +35,7 @@ export default {
                {{ store.quantityCounter }}
             </td>
             <td class="fw-bold">
-               {{ store.totalPrice }} €
+               {{ (store.totalPrice.toFixed(2)) }}€
             </td>
          </tr>
          <tr v-if="this.$route.name != 'checkout'">
@@ -46,13 +46,13 @@ export default {
             </td>
          </tr>
       </tbody>
-      <tbody v-else>
+      <!-- <tbody>
          <tr v-if="this.$route.name != 'checkout'">
             <th scope="row">-</th>
             <td>-</td>
             <td>-</td>
          </tr>
-         <tr v-else>
+         <tr>
             <td></td>
             <td class="text-center">
                Il carrello è vuoto, se vuoi...
@@ -60,8 +60,11 @@ export default {
             </td>
             <td></td>
          </tr>
-      </tbody>
+      </tbody> -->
    </table>
+   <div v-else>
+      <h1>Scegli qualcosa</h1>
+   </div>
 </template>
 
 <style lang="scss">

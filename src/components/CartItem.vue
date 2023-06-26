@@ -21,7 +21,7 @@ export default {
         <span class="px-2 mx-2 border">{{ store.cart[foodObject.slug].quantity }}</span>
         <span class="px-2 bg-warning border rounded-circle" @click.stop="store.addToCart(foodObject, restaurantSlug)">+</span>
     </td> 
-    <td>{{ foodObject.price }}</td>
+    <td>{{ (foodObject.price * foodObject.quantity).toFixed(2)}}€</td>
 </template>
 
 <style scoped lang="scss">

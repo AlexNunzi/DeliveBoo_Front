@@ -24,12 +24,12 @@ export default {
          </button>
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <!-- <li class="provvisorio">
+               <li class="provvisorio">
                   <ul class="d-flex">
                      <li><router-link to="/checkout" class="nav-link">checkout</router-link></li>
                      <li><router-link to="/success" class="nav-link">success-payment</router-link></li>
                   </ul>
-               </li>  -->
+               </li> 
                <li class="nav-item">
                   <a class="nav-link" href="#">Home</a>
                </li>
