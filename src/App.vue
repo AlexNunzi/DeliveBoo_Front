@@ -1,30 +1,36 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
+import EmptyCart from "./components/EmptyCart.vue";
+
+
+export default {
+   name: "App.vue",
+   components: {
+      AppHeader,
+      AppFooter,
+      EmptyCart
+   }
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+   <EmptyCart/>
+   <div class="debug">
+      <AppHeader />
+      <div class="container bg-warning">
+         <router-view/>
+      </div>
+      <NotFound />
+      <AppFooter />
+   </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style lang="scss">
+@use "./styles/general.scss" as *;
+@use "./styles/variables.scss" as *;
+
+.debug{
+   height: 100vh;
 }
 </style>

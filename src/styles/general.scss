@@ -1,0 +1,8 @@
+@use "bootstrap";
+@use "./variables.scss" as *;
+
+.centrato{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
