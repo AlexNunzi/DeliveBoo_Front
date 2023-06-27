@@ -21,25 +21,31 @@ export default {
 </script>
 
 <template>
-   <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="dropdown">
-      <div>
-         <i class="fa-brands fa-opencart position-relative"></i>
+   <div>
+      <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="dropdown">
+         <div>
+            <i class="fa-brands fa-opencart position-relative"></i>
+         </div>
+         <div class="ps-2 fw-bold">{{ this.store.quantityCounter }}</div>
       </div>
-      <div class="ps-2 fw-bold">{{ this.store.quantityCounter }}</div>
-   </div>
-   <div class="d-flex align-items-center">
-      <div class="dropstart">
-         <ul class="dropdown-menu p-3">
-            <li>
-               <OrderTable />
-            </li>
-         </ul>
+      <div class="d-flex align-items-center">
+         <div class="dropstart">
+            <ul class="dropdown-menu p-3">
+               <li id="carrello">
+                  <OrderTable />
+               </li>
+            </ul>
+         </div>
       </div>
    </div>
 </template>
 
 <style lang="scss">
 @use "../styles/general.scss";
+
+#carrello{
+   width: 35rem;
+}
 
 td{
    vertical-align: middle;

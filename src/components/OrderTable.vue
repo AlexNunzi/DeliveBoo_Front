@@ -15,12 +15,12 @@ export default {
 </script>
 
 <template>
-   <div id="carrello" v-if="!store.cartIsEmpty()">
-      <table class="table table-striped p-3">
+   <div v-if="!store.cartIsEmpty()">
+      <table id="tabella" class="table table-striped p-3 text-center">
          <thead>
             <tr>
                <th scope="col">Piatto</th>
-               <th scope="col" class="text-center">Quantità</th>
+               <th scope="col">Quantità</th>
                <th scope="col">Prezzo</th>
                <th scope="col">Elimina</th>
             </tr>
@@ -33,7 +33,7 @@ export default {
             </tr>
             <tr>
                <th scope="row">Totale</th>
-               <td class="text-center fw-bold">
+               <td class="fw-bold">
                   {{ store.quantityCounter }}
                </td>
                <td class="fw-bold">
@@ -67,7 +67,6 @@ export default {
          <button type="button" class="empty-cart btn btn-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
          <router-link :to="{ name: 'checkout' }" class="pagamento btn btn-primary">Vai al pagamento</router-link>
       </div>
-      
    </div>
    <div v-else>
       <h4 class="text-center">Scegli quello che vuoi mangiare oggi!</h4>
@@ -77,19 +76,19 @@ export default {
 <style lang="scss">
 @use "../styles/general.scss";
 
-#carrello{
-   width: 35rem;
+#tabella{
+   width: 100%;
 }
 
-.pagamento, .empty-cart{
-   width: 6rem;
+#tabella .pagamento, #tabella .empty-cart{
+   width: 7rem;
    padding: 0;
    font-weight: bold;
 }
 
 
 @media all and (max-width: 35rem) {
-   #carrello{
+   #tabella{
       width: 100%;
    }
 }
