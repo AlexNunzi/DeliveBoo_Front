@@ -72,7 +72,9 @@ export default {
                      console.log(store.cart[food]);
                      food_ids.push({
                         'id': store.cart[food].foodId,
-                        'quantity': store.cart[food].quantity
+                        'quantity': store.cart[food].quantity,
+                        'name': store.cart[food].name,
+                        'price': store.cart[food].price
                      }); 
                   }
 
@@ -88,7 +90,7 @@ export default {
                   }).then(response => {
                      console.log(response);
                   }).catch(error => {
-                     console.log(error.response.data.errors);
+                     console.log(error);
                      // if(error.response.data.errors.customer_name != null){
                         this.nameError = error.response.data.errors.customer_name;
                      // }
