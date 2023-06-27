@@ -2,6 +2,8 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
 import EmptyCart from "./components/EmptyCart.vue";
+import AppCart from './components/AppCart.vue';
+
 
 
 export default {
@@ -9,7 +11,8 @@ export default {
    components: {
       AppHeader,
       AppFooter,
-      EmptyCart
+      EmptyCart,
+      AppCart
    }
 }
 </script>
@@ -18,6 +21,7 @@ export default {
    <EmptyCart/>
    <AppHeader />
    <div class="contenitore">
+      <AppCart/>
       <div class="bg-warning pb-5">
          <router-view/>
       </div>

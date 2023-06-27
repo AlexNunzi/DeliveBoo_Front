@@ -20,7 +20,7 @@ export default {
         <div class="centrato my-1">
             <h6 class="p-2">{{ foodObject.name }}</h6>
         </div>
-            <small>{{ foodObject.price }} €</small>
+        <small>{{ foodObject.price }} €</small>
     </div>
     <div class="my-2 pt-1" v-if="store.cart[foodObject.slug]">
         <span class="px-2 bg-warning border rounded-circle" @click="store.removeFromCart(foodObject)">-</span>

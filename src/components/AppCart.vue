@@ -1,53 +1,71 @@
 <script>
+import axios from 'axios';
 import {store} from '../store.js';
-import CartItem from './CartItem.vue';
-import OrderTable from './OrderTable.vue';
+import FoodCard from "../components/FoodCard.vue";
 
 export default {
-   name: "AppCart",
+   name: 'AppCart',
    data() {
       return {
-         store
+         store,
+         restaurant: {},
+         restaurantSlug: localStorage.getItem('currentSlug'),
+         foods: [],
       }
    },
    components: {
-      CartItem,
-      OrderTable
+      FoodCard,
    },
-   mounted(){
-      this.store.cartCounterRefresh();
+   methods: {
+      getFoods() {
+         const restaurant_slug = this.$route.params.slug;
+         axios.get(`${this.store.urlApi}foods/${restaurant_slug}`)
+            .then(response => {
+               this.restaurant = response.data.results.restaurant;
+               this.foods = response.data.results.foods;
+            });
+      },
+   },
+   created() {
+      this.getFoods();
+      this.$watch(
+         () => this.$route.params,
+         (toParams, previousParams) => {
+            this.getFoods();
+         }
+      )
    }
 }
 </script>
 
 <template>
-   <div>
-      <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="dropdown">
-         <div>
-            <i class="fa-brands fa-opencart position-relative"></i>
-         </div>
-         <div class="ps-2 fw-bold">{{ this.store.quantityCounter }}</div>
+   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+         <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrello</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="d-flex align-items-center">
-         <div class="dropstart">
-            <ul class="dropdown-menu p-3">
-               <li id="carrello">
-                  <OrderTable />
-               </li>
-            </ul>
+      <div class="offcanvas-body">
+         <div v-if="!store.cartIsEmpty()" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-6 g-3 py-3 justify-content-around">
+            <div v-for="food in store.cart" class="col carta bg-white text-center p-0">
+               <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug" />
+            </div>
+            <div class="d-flex justify-content-around">
+               <button type="button" class="empty-cart btn btn-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
+               <router-link :to="{ name: 'checkout' }" class="pagamento btn btn-primary">Vai al pagamento</router-link>
+            </div>
          </div>
+         <div v-else>
+            <h4 class="text-center">Scegli quello che vuoi mangiare oggi!</h4>
+         </div>
+         
       </div>
    </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "../styles/general.scss";
 
-#carrello{
-   width: 35rem;
-}
-
-td{
-   vertical-align: middle;
+#offcanvasRight{
+   width: 55rem;
 }
 </style>
