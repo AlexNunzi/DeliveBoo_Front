@@ -29,6 +29,14 @@ export default {
             this.checked.push(index);
          }
       },
+      uncheck(){
+         const label = document.querySelectorAll(".checked")         
+         for (let i = 0; i < label.length; i++) {
+            label[i].classList.remove("checked");
+         }
+         document.getElementsByClassName("checkbox").checked = false
+         this.checked = []
+      },
       getTypes() {
          this.loading = true;
          axios.get(`${this.store.urlApi}types/`)
@@ -75,14 +83,17 @@ export default {
    <div class="container-xxl">
       <div class="row g-3 py-3 justify-content-around">
          <div class="col-6 col-md-5 col-xl-4 col-xxl-3" v-for="tipo in types">
-            <input :id="tipo.id" type="checkbox" class="d-none" :value="tipo.id" name="type_id[]">
+            <input :id="tipo.id" type="checkbox" class="checkbox d-none" :value="tipo.id" name="type_id[]">
             <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
                <img :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
                <h4 class="p-2 centrato flex-grow-1">{{ tipo.name }}</h4>
             </label>
          </div>
       </div>
-      <a href="#footer" class="btn btn-primary" @click="getRestaurants">Cerca</a>
+      <div>
+         <a href="#footer" class="btn btn-success" @click="getRestaurants">Cerca</a>
+         <button class="btn btn-primary ms-3" @click="uncheck">Reset</button>
+      </div>
       <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
       <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
       <div id="lista" class="py-4 bg-success" v-if="lista">

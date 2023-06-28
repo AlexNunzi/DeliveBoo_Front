@@ -45,9 +45,14 @@ export default {
          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-         <div v-if="!store.cartIsEmpty()" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-6 g-3 py-3 justify-content-around">
-            <div v-for="food in store.cart" class="col carta bg-white text-center p-0">
-               <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug" />
+         <div v-if="!store.cartIsEmpty()" class="">
+            <div class="row row-cols-2 g-3 py-3 justify-content-around">
+               <div v-for="food in store.cart" class="col carta bg-white text-center p-0">
+                  <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug" />
+               </div>
+            </div>
+            <div>
+               <h1>qua ci andranno i totali</h1>
             </div>
             <div class="d-flex justify-content-around">
                <button type="button" class="empty-cart btn btn-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
@@ -66,6 +71,6 @@ export default {
 @use "../styles/general.scss";
 
 #offcanvasRight{
-   width: 55rem;
+   width: 35rem;
 }
 </style>
