@@ -76,7 +76,8 @@ export const store = reactive ({
             name: food.name,
             slug: food.slug,
             price: food.price,
-            foodId: food.id
+            foodId: food.id,
+            image: food.image
          };
          // E lo salvo nel localStorage
          localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));

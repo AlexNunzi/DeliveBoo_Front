@@ -16,7 +16,9 @@ export default {
 
 <template>
     <div data-bs-toggle="modal" :data-bs-target="'#'+foodObject.slug">
+        
         <img :src="`${this.store.baseUrl}storage/${foodObject.image}`" :alt="'Immagine ristorante ' + foodObject.name">
+
         <div class="centrato my-1">
             <h6 class="p-2">{{ foodObject.name }}</h6>
         </div>

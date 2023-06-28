@@ -73,8 +73,7 @@ export default {
                   <p>Il tuo carrello ha già prodotti di un altro ristorante!</p>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="backToRestaurant"
-                     @click="changeRestaurant()">Torna al ristorante precedente</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="changeRestaurant()">Torna al ristorante precedente</button>
                   <span>Oppure</span>
                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="store.resetLocal()">Svuota il carrello</button>
                </div>
@@ -112,12 +111,7 @@ export default {
    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.carta {
-   transition: all 0.2s;
-   box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
-   overflow: hidden;
-   width: 11rem;
-}
+
 
 #btn-cart {
    width: 60%;

@@ -29,13 +29,16 @@ export default {
             this.checked.push(index);
          }
       },
-      uncheck(){
-         const label = document.querySelectorAll(".checked")         
+      reset(){
+         const label = document.querySelectorAll(".checked")   
+         const lista = document.getElementById("lista");
+         lista.classList.remove("show")      
          for (let i = 0; i < label.length; i++) {
             label[i].classList.remove("checked");
          }
          document.getElementsByClassName("checkbox").checked = false
          this.checked = []
+         this.lista = false
       },
       getTypes() {
          this.loading = true;
@@ -48,6 +51,8 @@ export default {
       getRestaurants() {
          this.noResults = false;
          this.noSelected = false;
+         const lista = document.getElementById("lista");
+         lista.classList.add("show")
          if (this.checked.length != 0) {
             axios.get(`${this.store.urlApi}restaurant/type`,
             {
@@ -90,17 +95,17 @@ export default {
             </label>
          </div>
       </div>
-      <div>
-         <a href="#footer" class="btn btn-success" @click="getRestaurants">Cerca</a>
-         <button class="btn btn-primary ms-3" @click="uncheck">Reset</button>
+      <div class="pb-4">
+         <a href="#footer" class="btn btn-success" @click="getRestaurants" data-bs-add="collapse" data-bs-target="#lista">Cerca</a>
+         <button class="btn btn-primary ms-3" @click="reset">Reset</button>
       </div>
-      <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
-      <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
-      <div id="lista" class="py-4 bg-success" v-if="lista">
+      <div id="lista" class="p-4 bg-info rounded-3 accordion-collapse collapse">
+         <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
+         <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
          <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
             <h2>{{ restaurant.name }}</h2>
             <div class="d-flex align-items-center">
-               <span class="mx-2 bg-white" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
+               <span class="mx-2 bg-white p-1 rounded-2" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
                <router-link :to="`/ristorante/${restaurant.slug}`" class="btn btn-success">Menu</router-link> 
             </div>
          </div>
