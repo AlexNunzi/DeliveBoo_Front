@@ -90,16 +90,18 @@ export default {
                   }).then(response => {
                      console.log(response);
                   }).catch(error => {
-                     console.log(error);
-                     // if(error.response.data.errors.customer_name != null){
+                     if(error.response.data.errors.customer_name != null){
                         this.nameError = error.response.data.errors.customer_name;
-                     // }
-                     // if(error.response.data.errors.customer_phone_number != null){
-                        
-                     // }
-                     this.phoneError = error.response.data.errors.customer_phone_number;
-                     this.addressError = error.response.data.errors.customer_address;
-                     this.emailError = error.response.data.errors.customer_email;
+                     }
+                     if(error.response.data.errors.customer_phone_number != null){
+                        this.phoneError = error.response.data.errors.customer_phone_number;
+                     }
+                     if(error.response.data.errors.customer_address != null){
+                        this.addressError = error.response.data.errors.customer_address;
+                     }
+                     if(error.response.data.errors.customer_email != null){
+                        this.emailError = error.response.data.errors.customer_email;
+                     }
                   });
                });
             });
