@@ -2,6 +2,7 @@
 import {store} from '../store.js';
 import OrderTable from '../components/OrderTable.vue';
 import axios from 'axios';
+import { router } from '../router';
 
 export default {
    name: "CheckoutPage",
@@ -16,6 +17,7 @@ export default {
          phoneError: null,
          emailError: null,
          addressError: null,
+         loading: false
       }
    },
    components: {
@@ -40,7 +42,6 @@ export default {
          },
          brainTree() {
             let button = document.querySelector('#submit-button');
-         
             braintree.dropin.create({
             authorization: this.store.clientBraintreeToken,
             container: '#dropin-container',
@@ -50,7 +51,6 @@ export default {
                // An error in the create call is likely due to
                // incorrect configuration values or network issues.
                // An appropriate error will be shown in the UI.
-               console.log('Create Erros');
                console.error(createErr);
                return;
             }
@@ -60,16 +60,13 @@ export default {
                   if (requestPaymentMethodErr) {
                   // No payment method is available.
                   // An appropriate error will be shown in the UI.
-                  console.log('request Payment Method Error')
                   console.error(requestPaymentMethodErr);
                   return;
                   }
                   // Submit payload.nonce to your server
-
+                  this.loading = true;
                   let food_ids = [];
-
                   for(const food in store.cart) {
-                     console.log(store.cart[food]);
                      food_ids.push({
                         'id': store.cart[food].foodId,
                         'quantity': store.cart[food].quantity,
@@ -77,9 +74,6 @@ export default {
                         'price': store.cart[food].price
                      }); 
                   }
-
-                  console.log(food_ids);
-                  console.log(payload.nonce);
                   axios.post(`${store.urlApi}client/make-payment`, {
                   'token': payload.nonce,
                   'food_ids': food_ids,
@@ -88,8 +82,12 @@ export default {
                   'customer_address': this.customerAddress,
                   'customer_email': this.customerEmail
                   }).then(response => {
-                     console.log(response);
+                     if(response.data.success){
+                        this.loading = false
+                        router.push({name: 'success-payment'})
+                     };
                   }).catch(error => {
+                     this.loading = false;
                      if(error.response.data.errors.customer_name != null){
                         this.nameError = error.response.data.errors.customer_name;
                      }
@@ -118,11 +116,10 @@ export default {
    <div class="pt-5">
       <OrderTable />
    </div>
+   <div class="myLoading" v-if="loading">
+      <img src="https://slcgdxb.com/wp-content/uploads/2017/12/Processing.gif" alt="">
+   </div>
    <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2">
-      <!-- <form id="payment-form" action="/success" method="get">
-         <div id="dropin-container"></div>
-         <input type="submit" />
-      </form> -->
       <form method="POST" class="mt-5 py-2 bg-white border h-100" @click="changeFormValue" >
          <div class="mb-3">
             <div class="d-flex">
@@ -179,5 +176,18 @@ export default {
 //brainTree
 .braintree-heading, .braintree-placeholder, .braintree-sheet__header .braintree-sheet__header-label{
    display: none;
+}
+.myLoading {
+   background-color: white;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 1213;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
 }
 </style>
