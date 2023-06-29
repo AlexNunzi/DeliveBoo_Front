@@ -88,7 +88,7 @@ export default {
    <HeroHome />
    <div class="container-xxl">
       <div class="row g-3 py-3 justify-content-around">
-         <div class="col-6 col-md-5 col-xl-4 col-xxl-3" v-for="tipo in types">
+         <div class="col-6 col-sm-4 col-md-5 col-xl-4 col-xxl-3 d-flex d-md-block justify-content-center" v-for="tipo in types">
             <input :id="tipo.id" type="checkbox" class="checkbox d-none" :value="tipo.id" name="type_id[]">
             <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
                <img :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
@@ -100,10 +100,10 @@ export default {
          <a href="#footer" class="btn btn-success" @click="getRestaurants" data-bs-add="collapse" data-bs-target="#lista">Cerca</a>
          <button class="btn btn-primary ms-3" @click="reset">Reset</button>
       </div>
-      <div id="lista" class="p-4 bg-info rounded-3 accordion-collapse collapse">
+      <div id="lista" class="p-4 rounded-3 accordion-collapse collapse">
          <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
          <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
-         <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
+         <div class="d-flex justify-content-between my-2" v-for="restaurant in restaurants">
             <h2>{{ restaurant.name }}</h2>
             <div class="d-flex align-items-center">
                <span class="mx-2 bg-white p-1 rounded-2" v-for="tipo in restaurant.types">{{ tipo.name }}</span>

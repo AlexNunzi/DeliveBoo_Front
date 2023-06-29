@@ -91,11 +91,11 @@ export default {
             <p>{{ restaurant.description }}</p>
          </div>
       </div>
-      <div id="restaurant-foods"
-         class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-6 g-3 py-3 justify-content-around">
-         <div v-for="food in foods" class="col carta bg-white text-center p-0">
-            <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug" />
-            <FoodModal :foodObject="food" :restaurantSlug="restaurant.slug" />
+
+      <div id="restaurant-foods" class="row g-3 py-3 justify-content-center">
+         <div v-for="food in foods" class="col-sm-6 col-md-4 col-lg-3 p-3 carta text-center p-0">
+            <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug"/>
+            <FoodModal :foodObject="food" :restaurantSlug="restaurant.slug"/>
          </div>
       </div>
    </div>
@@ -127,8 +127,4 @@ export default {
 
 @media all and (min-width: 480px) {}
 
-@media all and (max-width: 479px) {
-   .carta {
-      width: 11rem;
-   }
-}</style>
+</style>
