@@ -1,8 +1,14 @@
 @use "bootstrap";
 @use "./variables.scss" as *;
 
-.centrato{
+.centrato {
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+.my-btn {
+   border-radius: 50px;
+   border: 1px solid black;
+   background-color: #1A8754;
 }
