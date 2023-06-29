@@ -28,7 +28,7 @@ export default {
          <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrello</h5>
          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body">
+      <div id="cart-canvas" class="offcanvas-body">
          <div v-if="!store.cartIsEmpty()" class="">
             <div class="row row-cols-2 g-3 py-3 justify-content-around">
                <div v-for="food in store.cart" class="col carta bg-white text-center p-0">

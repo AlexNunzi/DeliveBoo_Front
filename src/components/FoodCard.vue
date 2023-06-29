@@ -22,7 +22,8 @@ export default {
         <div class="centrato my-1">
             <h6 class="p-2">{{ foodObject.name }}</h6>
         </div>
-        <small>{{ foodObject.price }} €</small>
+        <small id="single-price">{{ foodObject.price }} €</small>
+        <small id="total-price">{{ (foodObject.price * foodObject.quantity).toFixed(2)}} €</small>
     </div>
     <div class="my-2 pt-1" v-if="store.cart[foodObject.slug]">
         <span class="px-2 bg-warning border rounded-circle" @click="store.removeFromCart(foodObject)">-</span>
@@ -45,6 +46,14 @@ export default {
 
 .centrato{
     height: 4rem;
+}
+
+#cart-canvas #single-price{
+    display: none;
+}
+
+#restaurant-foods #total-price{
+    display: none;
 }
 
 </style>
