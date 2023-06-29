@@ -118,7 +118,7 @@ export default {
          <OrderTable />
       </div>
       <div class="myLoading" v-if="loading">
-         <img src="https://slcgdxb.com/wp-content/uploads/2017/12/Processing.gif" alt="">
+         <img class="myImg" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgbtpos.com%2Fwp-content%2Fuploads%2F2019%2F10%2FPOS-Animation.gif&f=1&nofb=1&ipt=74579b96a8ed7e91d135eb64726df2c0e36be7b78034685bdfcf581e82bacf04&ipo=images" alt="">
       </div>
       <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2">
          <form method="POST" class="mt-5 py-2 bg-white border h-100" @click="changeFormValue">
@@ -139,6 +139,7 @@ export default {
                   </div>
                </div>
             </div>
+         </div>
          <div class="mb-3">
             <label for="customer_address" class="form-label">Indirizzo:</label>
             <input type="text" class="form-control" :class="addressError != null ? 'is-invalid' : ''" id="customer_address" name="customer_address" @keyup="ValidationForm()" placeholder="Via Le dita dal Naso 5"  v-model="customerAddress" required>
@@ -168,6 +169,7 @@ export default {
          <p>data: 01/25</p>
       </div>
    </div>
+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -178,7 +180,7 @@ export default {
    display: none;
 }
 .myLoading {
-   background-color: white;
+   background-color: rgba(0,0,0,0.5);
    position: fixed;
    top: 0;
    left: 0;
@@ -188,6 +190,15 @@ export default {
    display: flex;
    justify-content: center;
    align-items: center;
-   
+   .myImg{
+      border-radius: 50px;
+      width: 250px;
+   }
+}
+
+@media all and (min-width: 768px) {
+   .myLoading .myImg{
+      width: 500px;
+   }
 }
 </style>

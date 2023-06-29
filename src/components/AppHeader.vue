@@ -20,16 +20,8 @@ export default {
 <template>
    <div class="bg-white fixed-top">
       <div class="container">
-         <nav class="navbar navbar-expand-md bg-light">
+         <nav class="navbar navbar-expand-md bg-light justify-content-between">
             <router-link to="/" class="nav-link logo">DeliveBoo</router-link>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <li class="provvisorio">
-                  <ul class="d-flex">
-                     <li><router-link to="/checkout" class="nav-link">checkout</router-link></li>
-                     <li><router-link to="/success" class="nav-link">success-payment</router-link></li>
-                  </ul>
-               </li> 
-            </ul>
             <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                <div>
                   <i class="fa-brands fa-opencart"></i>
@@ -61,16 +53,5 @@ export default {
    }
 }
 
-// debug
-.provvisorio{
-   border: solid 2px red;
-}
-
-.nav-link:hover{
-   color: red;
-   font-weight: bold;
-}
-
-//
 
 </style>
