@@ -39,7 +39,7 @@ export default {
                this.foods = response.data.results.foods;
                this.modalShow();
             }).catch(error => {
-               router.push({name: 'not-found'});
+               router.push({ name: 'not-found' });
             });
       },
       checkRestaurantId() {
@@ -47,7 +47,7 @@ export default {
          return currentRestaurant == this.restaurant.id;
       },
       changeRestaurant() {
-         router.push({name: 'restaurant', params: {slug: this.restaurantSlug}})
+         router.push({ name: 'restaurant', params: { slug: this.restaurantSlug } })
       }
    },
    created() {
@@ -75,9 +75,11 @@ export default {
                   <p>Il tuo carrello ha già prodotti di un altro ristorante!</p>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="changeRestaurant()">Torna al ristorante precedente</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="changeRestaurant()">Torna
+                     al ristorante precedente</button>
                   <span>Oppure</span>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="store.resetLocal()">Svuota il carrello</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="store.resetLocal()">Svuota
+                     il carrello</button>
                </div>
             </div>
          </div>
@@ -87,13 +89,13 @@ export default {
             <h3>{{ restaurant.name }}</h3>
             <h5>{{ restaurant.address }}</h5>
             <p>{{ restaurant.description }}</p>
-       </div>
-
+         </div>
       </div>
-      <div id="restaurant-foods" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-6 g-3 py-3 justify-content-around">
+      <div id="restaurant-foods"
+         class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-6 g-3 py-3 justify-content-around">
          <div v-for="food in foods" class="col carta bg-white text-center p-0">
-            <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug"/>
-            <FoodModal :foodObject="food" :restaurantSlug="restaurant.slug"/>
+            <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug" />
+            <FoodModal :foodObject="food" :restaurantSlug="restaurant.slug" />
          </div>
       </div>
    </div>
@@ -129,5 +131,4 @@ export default {
    .carta {
       width: 11rem;
    }
-}
-</style>
+}</style>
