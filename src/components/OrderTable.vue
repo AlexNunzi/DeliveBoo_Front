@@ -65,7 +65,7 @@ export default {
       </table>
       <div class="d-flex justify-content-around">
          <button type="button" class="empty-cart btn btn-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
-         <router-link :to="{ name: 'checkout' }" class="pagamento btn btn-primary">Vai al pagamento</router-link>
+         <router-link v-if="this.$route.name != 'checkout'" :to="{ name: 'checkout' }" class="pagamento btn btn-primary">Vai al pagamento</router-link>
       </div>
    </div>
    <div v-else>

@@ -40,7 +40,7 @@ export default {
             </div>
             <div class="d-flex justify-content-around">
                <button type="button" class="empty-cart btn btn-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
-               <button @click="goToPayment()" class="pagamento btn btn-primary" data-bs-dismiss="offcanvas">Vai al pagamento</button>
+               <button v-if="this.$route.name != 'checkout'" @click="goToPayment()" class="pagamento btn btn-primary" data-bs-dismiss="offcanvas">Vai al pagamento</button>
             </div>
          </div>
          <div v-else>
