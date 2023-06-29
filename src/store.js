@@ -106,6 +106,21 @@ export const store = reactive ({
       // Poi aggiorno i contatori di quantità totale e prezzo totale nello store
       this.cartCounterRefresh();
    },
+   removeCartItem(food) {
+      // Se è presente nel carrello una key uguale allo slug di food elimino la coppia chiave/valore
+      if(this.cart[food.slug]) {
+         delete store.cart[food.slug];
+      }
+      // Se il carrello è vuoto pulisco il localStorage
+      if(this.cartIsEmpty()) {
+         localStorage.clear();
+      } else {
+         // Altrimenti aggiorno i dati precedentemente salvati
+         localStorage.setItem('ilNostroCarrello', JSON.stringify(this.cart));
+      }
+      // Poi aggiorno i contatori di quantità totale e prezzo totale nello store
+      this.cartCounterRefresh();
+   },
    // Reset del localStorage
    resetLocal() {
       localStorage.clear();

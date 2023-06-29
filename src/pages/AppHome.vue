@@ -38,6 +38,7 @@ export default {
          }
          document.getElementsByClassName("checkbox").checked = false
          this.checked = []
+         this.restaurants = []
          this.lista = false
       },
       getTypes() {

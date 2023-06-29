@@ -18,12 +18,6 @@ export default {
             } else {
                 return name
             }
-        },
-        removeItem(food) {
-            delete store.cart[food.slug];
-            if(store.cartIsEmpty()) {
-                localStorage.clear();
-            }  
         }
     }
 }
@@ -38,7 +32,7 @@ export default {
     </td> 
     <td>{{ (foodObject.price * foodObject.quantity).toFixed(2)}}€</td>
     <td class="td-elimina">
-        <div class="elimina bg-danger p-2 rounded-3" @click.stop="removeItem(foodObject)">
+        <div class="elimina bg-danger p-2 rounded-3" @click.stop="store.removeCartItem(foodObject)">
             <i class="fa-solid fa-trash-can text-white"></i>
         </div>
     </td>
