@@ -25,13 +25,13 @@ export default {
 <template>
    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
-         <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrello</h5>
+         <h3 class="offcanvas-title fw-bold" id="offcanvasRightLabel">Carrello</h3>
          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div id="cart-canvas" class="offcanvas-body">
          <div v-if="!store.cartIsEmpty()" class="">
-            <div class="row row-cols-2 g-3 py-3 justify-content-around">
-               <div v-for="food in store.cart" class="col carta bg-white text-center p-0">
+            <div class="row row-cols-2 py-3 justify-content-around">
+               <div v-for="food in store.cart" class="col carta bg-white text-center border">
                   <FoodCard :foodObject="food" :restaurantSlug="restaurantSlug" />
                </div>
             </div>
