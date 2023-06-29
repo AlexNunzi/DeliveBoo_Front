@@ -29,6 +29,18 @@ export default {
             this.checked.push(index);
          }
       },
+      reset(){
+         const label = document.querySelectorAll(".checked")   
+         const lista = document.getElementById("lista");
+         lista.classList.remove("show")      
+         for (let i = 0; i < label.length; i++) {
+            label[i].classList.remove("checked");
+         }
+         document.getElementsByClassName("checkbox").checked = false
+         this.checked = []
+         this.restaurants = []
+         this.lista = false
+      },
       getTypes() {
          this.loading = true;
          axios.get(`${this.store.urlApi}types/`)
@@ -40,6 +52,8 @@ export default {
       getRestaurants() {
          this.noResults = false;
          this.noSelected = false;
+         const lista = document.getElementById("lista");
+         lista.classList.add("show")
          if (this.checked.length != 0) {
             axios.get(`${this.store.urlApi}restaurant/type`,
             {
@@ -72,26 +86,29 @@ export default {
 
 <template>
    <HeroHome />
-   <div class="row g-3 py-3 justify-content-around">
-      <div class="col-6 col-md-4 col-lg-3" v-for="tipo in types">
-         <input :id="tipo.id" type="checkbox" class="d-none" :value="tipo.id" name="type_id[]">
-         <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
-            <img :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
-            <div class="centrato">
-               <h6 class="p-2">{{ tipo.name }}</h6>
-            </div>
-         </label>
+   <div class="container-xxl">
+      <div class="row g-3 py-3 justify-content-around">
+         <div class="col-6 col-md-5 col-xl-4 col-xxl-3" v-for="tipo in types">
+            <input :id="tipo.id" type="checkbox" class="checkbox d-none" :value="tipo.id" name="type_id[]">
+            <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id)">
+               <img :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
+               <h4 class="p-2 centrato flex-grow-1">{{ tipo.name }}</h4>
+            </label>
+         </div>
       </div>
-   </div>
-   <div class="btn btn-primary" @click="getRestaurants">Lista</div>
-   <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
-   <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
-   <div class="lista" v-if="lista">
-      <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
-         <h2>{{ restaurant.name }}</h2>
-         <div class="d-flex align-items-center">
-            <span class="mx-2 bg-white" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
-            <router-link :to="`/ristorante/${restaurant.slug}`" class="btn btn-success">Menu</router-link> 
+      <div class="pb-4">
+         <a href="#footer" class="btn btn-success" @click="getRestaurants" data-bs-add="collapse" data-bs-target="#lista">Cerca</a>
+         <button class="btn btn-primary ms-3" @click="reset">Reset</button>
+      </div>
+      <div id="lista" class="p-4 bg-info rounded-3 accordion-collapse collapse">
+         <h1 v-if="noSelected">Seleziona almeno una tipologia</h1>
+         <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
+         <div class="d-flex justify-content-between my-2 border" v-for="restaurant in restaurants">
+            <h2>{{ restaurant.name }}</h2>
+            <div class="d-flex align-items-center">
+               <span class="mx-2 bg-white p-1 rounded-2" v-for="tipo in restaurant.types">{{ tipo.name }}</span>
+               <router-link :to="`/ristorante/${restaurant.slug}`" class="btn btn-success">Menu</router-link> 
+            </div>
          </div>
       </div>
    </div>
@@ -151,7 +168,7 @@ h6 {
 img {
    height: 8rem;
    width: 8rem;
-   object-fit: fill;
+   object-fit: cover;
 }
 
 

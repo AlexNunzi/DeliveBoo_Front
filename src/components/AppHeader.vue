@@ -1,28 +1,27 @@
 <script>
-import AppCart from './AppCart.vue'
+import { store } from '../store.js';
+import AppCart from './AppCart.vue';
 export default {
    name: "AppHeader",
+   data() {
+      return {
+         store
+      }
+   },
    components: {
       AppCart
    },
-   data() {
-      return {
-      }
-   },
-   methods: {
+   mounted() {
+      this.store.cartCounterRefresh();
    }
 }
 </script>
 
 <template>
-   <div class="container">
-      <nav class="navbar navbar-expand-md bg-light">
-         <router-link to="/" class="nav-link logo">DeliveBoo</router-link>
-         <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span><i class="fa-solid fa-burger"></i></span>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   <div class="bg-white fixed-top">
+      <div class="container">
+         <nav class="navbar navbar-expand-md bg-light">
+            <router-link to="/" class="nav-link logo">DeliveBoo</router-link>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                <li class="provvisorio">
                   <ul class="d-flex">
@@ -30,21 +29,24 @@ export default {
                      <li><router-link to="/success" class="nav-link">success-payment</router-link></li>
                   </ul>
                </li> 
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Home</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-               </li>
             </ul>
-         </div>
-         <AppCart/>
-      </nav>
+            <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+               <div>
+                  <i class="fa-brands fa-opencart"></i>
+               </div>
+               <div class="ps-2 fw-bold">{{ this.store.quantityCounter }}</div>
+            </div>
+         </nav>
+      </div>
    </div>
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/general.scss";
+
+.container{
+   z-index: 2000;
+}
 
 .logo{
    font-size: 3rem;

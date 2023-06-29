@@ -2,6 +2,8 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
 import EmptyCart from "./components/EmptyCart.vue";
+import AppCart from './components/AppCart.vue';
+
 
 
 export default {
@@ -9,28 +11,30 @@ export default {
    components: {
       AppHeader,
       AppFooter,
-      EmptyCart
+      EmptyCart,
+      AppCart
    }
 }
 </script>
 
 <template>
    <EmptyCart/>
-   <div class="debug">
-      <AppHeader />
-      <div class="container bg-warning">
+   <AppHeader />
+   <div class="contenitore">
+      <AppCart/>
+      <div class="bg-warning pb-5">
          <router-view/>
       </div>
-      <NotFound />
       <AppFooter />
    </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "./styles/general.scss" as *;
 @use "./styles/variables.scss" as *;
 
-.debug{
-   height: 100vh;
+.contenitore{
+   margin-top: 5.5rem;
 }
+
 </style>

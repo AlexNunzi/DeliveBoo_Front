@@ -113,32 +113,32 @@ export default {
 </script>
 
 <template>
-   <div class="pt-5">
-      <OrderTable />
-   </div>
-   <div class="myLoading" v-if="loading">
-      <img src="https://slcgdxb.com/wp-content/uploads/2017/12/Processing.gif" alt="">
-   </div>
-   <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2">
-      <form method="POST" class="mt-5 py-2 bg-white border h-100" @click="changeFormValue" >
-         <div class="mb-3">
-            <div class="d-flex">
-               <div class="w-75">
-                  <label for="customer_name" class="form-label">Nome:</label>
-                  <input type="text" class="form-control" :class="nameError != null ? 'is-invalid' : ''" id="customer_name" name="customer_name" placeholder="Mario Rossi" @keyup="ValidationForm()"  v-model="customerName" required>
-                  <div v-if="nameError != null"  class="invalid-feedback">
-                     <p v-for="element in nameError">{{ element }}</p>
+   <div class="container">
+      <div class="pt-5">
+         <OrderTable />
+      </div>
+      <div class="myLoading" v-if="loading">
+         <img src="https://slcgdxb.com/wp-content/uploads/2017/12/Processing.gif" alt="">
+      </div>
+      <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2">
+         <form method="POST" class="mt-5 py-2 bg-white border h-100" @click="changeFormValue">
+            <div class="mb-3">
+               <div class="d-flex">
+                  <div class="w-75">
+                    <label for="customer_name" class="form-label">Nome:</label>
+                      <input type="text" class="form-control" :class="nameError != null ? 'is-invalid' : ''" id="customer_name" name="customer_name" placeholder="Mario Rossi" @keyup="ValidationForm()"  v-model="customerName" required>
+                      <div v-if="nameError != null"  class="invalid-feedback">
+                         <p v-for="element in nameError">{{ element }}</p>
+                      </div>
                   </div>
-               </div>
-               <div class="ms-5">
-                  <label for="customer_phone_number" class="form-label">Telefono:</label>
-                  <input type="tel" class="form-control" :class="phoneError != null ? 'is-invalid' : ''" id="customer_phone_number" name="customer_phone_number" @keyup="ValidationForm()" placeholder="012-3456789"  v-model="customerPhone" required>
+                  <div class="ms-5">
+                    <label for="customer_phone_number" class="form-label">Telefono:</label>
+                    <input type="tel" class="form-control" :class="phoneError != null ? 'is-invalid' : ''" id="customer_phone_number" name="customer_phone_number" @keyup="ValidationForm()" placeholder="012-3456789"  v-model="customerPhone" required>
                   <div v-if="phoneError != null" class="invalid-feedback">
-                     <p v-for="element in phoneError">{{ element }}</p>
+                   <p v-for="element in phoneError">{{ element }}</p>
                   </div>
                </div>
             </div>
-         </div>
          <div class="mb-3">
             <label for="customer_address" class="form-label">Indirizzo:</label>
             <input type="text" class="form-control" :class="addressError != null ? 'is-invalid' : ''" id="customer_address" name="customer_address" @keyup="ValidationForm()" placeholder="Via Le dita dal Naso 5"  v-model="customerAddress" required>

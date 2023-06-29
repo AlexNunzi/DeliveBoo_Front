@@ -1,10 +1,14 @@
 <script>
+import { store } from '../store.js';
 export default {
    name: "FoodModal",
+   props: {
+         foodObject: Object,
+         restaurantSlug: String
+   },
    data() {
       return {
-         food: ['Pizza', 'Panino', 'Pasta', 'Riso', 'Spaghetti', 'Biscotti', 'Involtini', 'Arrosto', 'Insalata', "Formaggio", "Lasagne", "Cappelletti"],
-         quantity: 0,
+         store
       }
    },
    methods: {
@@ -14,7 +18,7 @@ export default {
 </script>
 
 <template>
-   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" :id="foodObject.slug" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
          <div class="modal-content">
             <div class="modal-body position-relative">
@@ -22,21 +26,21 @@ export default {
                   <i class="fa-solid fa-x"></i>
                </button>
                <div class="testo">
-                  <img class="h-100 w-100" src="https://picsum.photos/200/300" :alt="'Immagine ristorante ' + cibo">
+                  <img :src="`${this.store.baseUrl}storage/${foodObject.image}`" :alt="'Immagine ristorante ' + foodObject.name">
                </div>
                <div class="centrato flex-column">
-                  <h6 class="p-2 m-0">{{ cibo }}</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe reiciendis corporis corrupti accusamus pariatur perspiciatis blanditiis assumenda consequatur vero. Necessitatibus fuga iste velit nobis, quidem sit fugiat maiores nihil repellat.</p>
-                  <small>Prezzo €</small>
+                  <h5 class="p-2 m-0">{{ foodObject.name }}</h5>
+                  <p>{{ foodObject.description }}</p>
+                  <small>{{ foodObject.price }}€</small>
                </div>
-               <div class="text-center">
-                  <div id="btn-cart" class="my-2 bg-warning" @click="quantity++" v-show="quantity<1">
+               <div class="centrato">
+                  <div class="my-2 pt-1" v-if="store.cart[foodObject.slug]">
+                     <span class="px-2 bg-warning border rounded-circle" @click="store.removeFromCart(foodObject)">-</span>
+                     <span class="px-2 mx-2 border">{{ store.cart[foodObject.slug].quantity }}</span>
+                     <span class="px-2 bg-warning border rounded-circle" @click="store.addToCart(foodObject, restaurantSlug)">+</span>
+                  </div> 
+                  <div id="btn-cart" class="w-25 my-2 p-1 bg-warning rounded-5" @click="store.addToCart(foodObject, restaurantSlug)" v-else>
                      <i class="fa-brands fa-opencart"></i>
-                  </div>
-                  <div class="my-2" v-show="quantity>=1">
-                     <span class="px-2 bg-warning border rounded-circle" @click="quantity--">-</span>
-                     <span class="px-2 mx-2 border">{{ this.quantity }}</span>
-                     <span class="px-2 bg-warning border rounded-circle" @click="quantity++">+</span>
                   </div>
                </div>
             </div>
@@ -52,7 +56,9 @@ export default {
    height: 30vh;
 
    img{
-   object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
    }
 }
 
@@ -63,8 +69,6 @@ export default {
 }
 
 #btn-cart{
-   width: 40%;
-   line-height: 2rem;
-   border-radius: 5rem;
+   line-height: 1.5rem;
 }
 </style>
