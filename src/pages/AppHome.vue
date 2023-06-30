@@ -97,7 +97,7 @@ export default {
             </label>
          </div>
       </div>
-      <div class="pb-4">
+      <div class="d-flex justify-content-center">
          <button class="fancy-button bg-success text-decoration-none" @click="getRestaurants" data-bs-add="collapse"
             data-bs-target="#lista">Cerca</button>
          <button class="fancy-button bg-primary text-decoration-none ms-3" @click="reset">Reset</button>
