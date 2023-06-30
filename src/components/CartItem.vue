@@ -26,13 +26,13 @@ export default {
 <template>
     <th scope="row">{{ cutName(foodObject.name) }}</th>
     <td v-if="store.cart[foodObject.slug]">
-        <span class="px-2 bg-warning border rounded-circle" @click.stop="store.removeFromCart(foodObject)">-</span>
+        <i class="fa-solid fa-circle-minus text-danger fs-4" @click="store.removeFromCart(foodObject)"></i>
         <span class="px-2 mx-2 border">{{ store.cart[foodObject.slug].quantity }}</span>
-        <span class="px-2 bg-warning border rounded-circle" @click.stop="store.addToCart(foodObject, restaurantSlug)">+</span>
+        <i class="fa-solid fa-circle-plus text-success fs-4" @click="store.addToCart(foodObject, restaurantSlug)"></i>
     </td> 
     <td>{{ (foodObject.price * foodObject.quantity).toFixed(2)}}€</td>
     <td class="td-elimina">
-        <div class="elimina bg-danger p-2 rounded-3" @click.stop="store.removeCartItem(foodObject)">
+        <div class="btn elimina bg-danger p-2 rounded-3" @click.stop="store.removeCartItem(foodObject)">
             <i class="fa-solid fa-trash-can text-white"></i>
         </div>
     </td>

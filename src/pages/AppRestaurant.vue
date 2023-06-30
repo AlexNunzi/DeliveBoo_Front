@@ -88,7 +88,7 @@ export default {
          <div id="info-ristorante" class="p-2 p-md-3 text-white rounded-3">
             <h3>{{ restaurant.name }}</h3>
             <h5>{{ restaurant.address }}</h5>
-            <p>{{ restaurant.description }}</p>
+            <p v-if="restaurant.description">{{ restaurant.description }}</p>
          </div>
       </div>
 
