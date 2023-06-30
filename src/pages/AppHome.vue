@@ -219,10 +219,7 @@ img {
    left: 100%;
 }
 
-
-
-
-
+//responsive
 @media all and (min-width: 768px) {
 
    .carta {
@@ -232,7 +229,6 @@ img {
       align-items: center;
    }
 }
-
 
 @media all and (min-width: 480px) {}
 </style>
