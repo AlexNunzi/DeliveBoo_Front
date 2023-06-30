@@ -18,12 +18,12 @@ export default {
 </script>
 
 <template>
-   <EmptyCart/>
+   <EmptyCart />
    <AppHeader />
    <div class="contenitore">
-      <AppCart/>
+      <AppCart />
       <div class="bg-warning pb-5">
-         <router-view/>
+         <router-view />
       </div>
       <AppFooter />
    </div>
@@ -33,8 +33,7 @@ export default {
 @use "./styles/general.scss" as *;
 @use "./styles/variables.scss" as *;
 
-.contenitore{
-   margin-top: 5.5rem;
+.contenitore {
+   margin-top: 8rem;
 }
-
 </style>
