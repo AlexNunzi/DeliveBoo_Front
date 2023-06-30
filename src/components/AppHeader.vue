@@ -20,8 +20,10 @@ export default {
 <template>
    <div class="bg-white fixed-top">
       <div class="container">
-         <nav class="navbar navbar-expand-md bg-light justify-content-between">
-            <router-link to="/" class="nav-link logo">DeliveBoo</router-link>
+         <nav class="navbar navbar-expand-md bg-light justify-content-between overflow-hidden">
+            <router-link to="/" class="nav-link logo">
+               <img class="logo" src="public/My_project-1.png" alt="logo deliveboo">
+            </router-link>
             <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                <div>
                   <i class="fa-brands fa-opencart"></i>
@@ -41,8 +43,7 @@ export default {
 }
 
 .logo{
-   font-size: 3rem;
-   font-weight: bold;
+   width: 11rem;
 }
 
 .fa-opencart{
