@@ -26,7 +26,7 @@ export default {
             </tr>
          </thead>
          <tbody>
-            <tr v-for="cart in store.cart">
+            <tr v-for="cart in store.cart" class="align-middle">
                <CartItem
                   :foodObject="cart"
                />
