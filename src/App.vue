@@ -20,13 +20,11 @@ export default {
 <template>
    <EmptyCart />
    <AppHeader />
-   <div class="contenitore">
-      <AppCart />
-      <div class="bg-warning pb-5">
-         <router-view />
-      </div>
-      <AppFooter />
+   <AppCart />
+   <div class="bg-warning contenitore">
+      <router-view />
    </div>
+   <AppFooter />
 </template>
 
 <style lang="scss" scoped>
@@ -35,5 +33,7 @@ export default {
 
 .contenitore {
    margin-top: 8rem;
+   padding-bottom: 2rem;
+   min-height: calc(100vh - 14.7rem);
 }
 </style>
