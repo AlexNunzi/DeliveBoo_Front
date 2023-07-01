@@ -41,9 +41,10 @@ export default {
 <style scoped lang="scss">
 @use "../styles/general.scss";
 
-.td-elimina{
+table .td-elimina{
     display: flex;
     justify-content: center;
+    padding: 12px 0;
 }
 
 .elimina{

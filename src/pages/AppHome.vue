@@ -79,6 +79,7 @@ export default {
             this.restaurants = [];
             this.noSelected = true
          }
+         document.getElementById("lista").scrollIntoView();
       },
       truncateDescription(text, max) {
          if(text.length > max) {
@@ -109,8 +110,6 @@ export default {
          </div>
       </div>
       <div class="d-flex justify-content-center">
-         <!-- <button class="fancy-button bg-success text-decoration-none" @click="getRestaurants" data-bs-add="collapse"
-            data-bs-target="#lista">Cerca</button> -->
          <button class="fancy-button bg-primary text-decoration-none ms-3" @click="reset">Reset</button>
       </div>
       <div id="lista" class="p-4 rounded-3 accordion-collapse collapse">
@@ -184,8 +183,7 @@ export default {
 @use "../styles/general.scss";
 
 img,
-.carta,
-h6 {
+.carta{
    transition: all 0.3s;
 }
 
@@ -197,10 +195,6 @@ h6 {
    &:hover {
       img {
          scale: 1.04;
-      }
-
-      h6 {
-         font-weight: bolder;
       }
    }
 
@@ -222,10 +216,6 @@ h6 {
    &:hover {
       img {
          scale: 1;
-      }
-
-      h6 {
-         font-weight: bolder;
       }
    }
 }

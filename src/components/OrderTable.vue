@@ -41,31 +41,10 @@ export default {
                </td>
                <td></td>
             </tr>
-            <!-- <tr v-if="this.$route.name != 'checkout'">
-               <th scope="row"></th>
-               <td></td>
-               <td></td>
-            </tr> -->
          </tbody>
-         <!-- <tbody>
-            <tr v-if="this.$route.name != 'checkout'">
-               <th scope="row">-</th>
-               <td>-</td>
-               <td>-</td>
-            </tr>
-            <tr>
-               <td></td>
-               <td class="text-center">
-                  Il carrello è vuoto, se vuoi...
-                  <router-link :to="{ name: 'home' }" class="btn btn-primary">Torna alla pagina dei ristoranti</router-link>
-               </td>
-               <td></td>
-            </tr>
-         </tbody> -->
       </table>
-      <div class="d-flex justify-content-around">
+      <div class="centrato pb-3">
          <button type="button" class="empty-cart btn btn-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
-         <router-link v-if="this.$route.name != 'checkout'" :to="{ name: 'checkout' }" class="pagamento btn btn-primary">Vai al pagamento</router-link>
       </div>
    </div>
    <div v-else>
@@ -85,7 +64,6 @@ export default {
    padding: 0;
    font-weight: bold;
 }
-
 
 @media all and (max-width: 35rem) {
    #tabella{

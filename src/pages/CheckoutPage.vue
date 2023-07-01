@@ -114,16 +114,17 @@ export default {
 
 <template>
    <div class="container">
-      <div class="pt-5">
+      <h1 class="py-4 fw-bold display-5">Riepilogo</h1>
+      <div>
          <OrderTable />
       </div>
       <div class="myLoading" v-if="loading">
          <img class="myImg"
             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgbtpos.com%2Fwp-content%2Fuploads%2F2019%2F10%2FPOS-Animation.gif&f=1&nofb=1&ipt=74579b96a8ed7e91d135eb64726df2c0e36be7b78034685bdfcf581e82bacf04&ipo=images"
-            alt="">
+         >
       </div>
-      <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2">
-         <form method="POST" class="mt-5 py-2 bg-white border h-100" @click="changeFormValue">
+      <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2 bg-white">
+         <form method="POST" class="mt-5 py-2 h-100" @click="changeFormValue">
             <div class="mb-3">
                <div class="d-flex">
                   <div class="w-75">
@@ -185,12 +186,6 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
-//brainTree
-.braintree-heading,
-.braintree-placeholder,
-.braintree-sheet__header .braintree-sheet__header-label {
-   display: none;
-}
 
 .myLoading {
    background-color: rgba(0, 0, 0, 0.5);
