@@ -19,7 +19,7 @@ export default {
                src: '/hamburger-carousel.jpg'
             },
             {
-               src: '/pasta-carousel.jpg'
+               src: '/risotto-carousel.jpg'
             },
             {
                src: '/sushi-carousel.jpg'
