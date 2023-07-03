@@ -75,10 +75,9 @@ export default {
                   <p>Il tuo carrello ha già prodotti di un altro ristorante!</p>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="changeRestaurant()">Torna
-                     al ristorante precedente</button>
+                  <button type="button" class="btn btn-secondary fancy-button" data-bs-dismiss="modal" @click="changeRestaurant()">Torna al<br>ristorante precedente</button>
                   <span>Oppure</span>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="store.resetLocal()">Svuota
+                  <button type="button" class="btn btn-danger fancy-button" data-bs-dismiss="modal" @click="store.resetLocal()">Svuota <br>
                      il carrello</button>
                </div>
             </div>
@@ -115,16 +114,4 @@ export default {
 #info-ristorante {
    background-color: rgba(0, 0, 0, 0.5);
 }
-
-
-
-#btn-cart {
-   width: 60%;
-   border-radius: 5rem;
-   margin: auto;
-}
-
-@media all and (min-width: 768px) {}
-
-@media all and (min-width: 480px) {}
 </style>

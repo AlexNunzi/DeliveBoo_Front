@@ -13,7 +13,7 @@ export default {
     },
     methods: {
         cutName(name) {
-            if (name.length > 30) {
+            if (window.matchMedia("(max-width: 767px)").matches && name.length > 30) {
                 return (name).substring(0,30) + " ..."
             } else {
                 return name

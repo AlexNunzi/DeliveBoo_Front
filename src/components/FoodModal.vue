@@ -10,9 +10,6 @@ export default {
       return {
          store
       }
-   },
-   methods: {
-
    }
 }
 </script>

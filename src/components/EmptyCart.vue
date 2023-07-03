@@ -26,8 +26,7 @@ export default {
             <div class="modal-footer">
                <button type="button" class="fancy-button bg-success" data-bs-dismiss="modal">Chiudi</button>
                <button type="button" class="fancy-button bg-danger" data-bs-dismiss="modal"
-                  @click="store.resetLocal()">Svuota
-                  carrello</button>
+                  @click="store.resetLocal()">Svuota<br>carrello</button>
             </div>
          </div>
       </div>

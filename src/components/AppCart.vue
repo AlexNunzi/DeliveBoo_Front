@@ -39,10 +39,10 @@ export default {
                <h1 class="py-3">Totale: {{ (store.totalPrice.toFixed(2)) }}€</h1>
             </div>
             <div class="d-flex justify-content-around">
-               <button type="button" class="empty-cart btn btn-danger fancy-button bg-danger" data-bs-toggle="modal"
-                  data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
+               <button type="button" class="empty-cart btn btn-danger fancy-button" data-bs-toggle="modal"
+                  data-bs-target="#CartModal" @click.stop="">Svuota<br>carrello</button>
                <button v-if="this.$route.name != 'checkout'" @click="goToPayment()"
-                  class="pagamento btn p-2 fancy-button bg-success" data-bs-dismiss="offcanvas">Vai al pagamento</button>
+                  class="pagamento btn p-2 fancy-button bg-success" data-bs-dismiss="offcanvas">Vai al<br>pagamento</button>
             </div>
          </div>
          <div v-else>

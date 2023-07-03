@@ -29,7 +29,7 @@ export default {
             <span class="px-2 mx-2 border">{{ store.cart[foodObject.slug].quantity }}</span>
             <i class="fa-solid fa-circle-plus text-success fs-4" @click="store.addToCart(foodObject, restaurantSlug)"></i>
         </div> 
-        <div id="btn-cart" class="my-2 mx-5 p-1 bg-warning rounded-5" @click="store.addToCart(foodObject, restaurantSlug)" v-else>
+        <div id="btn-cart" class="my-2 mx-auto p-1 w-50 bg-warning rounded-5" @click="store.addToCart(foodObject, restaurantSlug)" v-else>
             <i class="fa-brands fa-opencart"></i>
         </div>
     </div>

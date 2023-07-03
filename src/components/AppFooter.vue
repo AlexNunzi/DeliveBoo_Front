@@ -6,9 +6,6 @@ export default {
       return {
          store
       }
-   },
-   methods: {
-
    }
 }
 </script>
@@ -19,18 +16,12 @@ export default {
          <div class="d-flex align-items-center justify-content-between flex-wrap container">
             <div class="col-12 col-md-6 text-white">
                <span class="me-3">© 2023 DeliveBoo, Inc</span>
-               <a href="/" class="link-body-emphasis text-decoration-none me-3">
-                  Logo
-               </a>
-
             </div>
-
             <div class="col-12 col-md-6 d-md-flex justify-content-md-end align-items-center">
                <router-link to="/" class="me-3 text-decoration-none">
                   Home
                </router-link>
                <a class="me-3 text-decoration-none" :href="this.store.baseUrl">Area Ristoratori</a>
-               <!-- <a class="me-3 text-decoration-none" href="#">About</a> -->
                <a class="text-body-secondary me-3 " href="#"><i class="fa-brands fa-instagram"></i></a>
                <a class="text-body-secondary me-3" href="#"><i class="fa-brands fa-twitter"></i></a>
                <a class="text-body-secondary me-3" href="#"><i class="fa-brands fa-facebook"></i></a>

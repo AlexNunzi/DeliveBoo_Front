@@ -39,7 +39,7 @@ export default {
             <img :src="image.src" alt="immagini" class="d-block w-100" width="800" height="600">
          </div>
       </div>
-      <h1 class="display-1 fw-bold text-center text-white position-absolute translate-middle">Tu lo desideri,<br /> noi te
+      <h1 class="display-1 fw-bold text-center text-white position-absolute top-50 start-50 translate-middle">Tu lo desideri,<br/> noi te
          lo Bootiamo!
       </h1>
    </div>
@@ -49,8 +49,6 @@ export default {
 @use "../styles/general.scss";
 
 h1 {
-   top: 50%;
-   left: 50%;
    text-shadow: 0 0 5px #000000;
 }
 

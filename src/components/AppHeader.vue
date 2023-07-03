@@ -1,18 +1,11 @@
 <script>
 import { store } from '../store.js';
-import AppCart from './AppCart.vue';
 export default {
    name: "AppHeader",
    data() {
       return {
          store
       }
-   },
-   components: {
-      AppCart
-   },
-   mounted() {
-      this.store.cartCounterRefresh();
    }
 }
 </script>
@@ -48,11 +41,6 @@ export default {
 
 .fa-opencart{
    font-size: 1.5rem;
-   cursor: pointer;
-   span{
-      font-size: 0.6rem;
-   }
 }
-
 
 </style>

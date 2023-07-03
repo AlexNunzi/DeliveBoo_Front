@@ -1,5 +1,4 @@
 @use "bootstrap";
-@use "./variables.scss" as *;
 
 .centrato {
    display: flex;
@@ -46,7 +45,7 @@ i {
 }
 
 .fancy-button:hover {
-   transform: scale(1.1);
+   transform: scale(1.05);
 }
 
 .fancy-button:hover:before {

@@ -123,7 +123,7 @@ export default {
             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgbtpos.com%2Fwp-content%2Fuploads%2F2019%2F10%2FPOS-Animation.gif&f=1&nofb=1&ipt=74579b96a8ed7e91d135eb64726df2c0e36be7b78034685bdfcf581e82bacf04&ipo=images">
       </div>
       <div v-show="!store.cartIsEmpty()" class="row bg-white ps-3 rounded-4">
-         <form method="POST" class="mt-5 col-6 py-2 h-100 border rounded-2" @click="changeFormValue">
+         <form method="POST" class="mt-5 col-12 col-md-6 py-2 h-100 border rounded-2" @click="changeFormValue">
             <div class="mb-3">
                <div class="d-flex">
                   <div class="w-75">
@@ -163,11 +163,11 @@ export default {
                </div>
             </div>
          </form>
-         <div class="mt-3 col-6">
+         <div class="mt-3 col-12 col-md-6">
             <div id="dropin-container"></div>
          </div>
          <div class="col-12 py-3 text-center">
-            <button id="submit-button" type="submit" class="btn fancy-button bg-primary" disabled>Invia il pagamento</button>
+            <button id="submit-button" type="submit" class="btn fancy-button bg-primary" disabled>Completa<br>l'ordine</button>
          </div>
       </div>
    </div>

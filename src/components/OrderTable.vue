@@ -18,7 +18,7 @@ export default {
    <div v-if="!store.cartIsEmpty()">
       <table id="tabella" class="table table-striped p-3 text-center">
          <thead>
-            <tr>
+            <tr class="fs-4">
                <th scope="col">Piatto</th>
                <th scope="col">Quantità</th>
                <th scope="col">Prezzo</th>
@@ -44,7 +44,7 @@ export default {
          </tbody>
       </table>
       <div class="centrato pb-3">
-         <button type="button" class="empty-cart btn fancy-button bg-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
+         <button type="button" class="empty-cart btn fancy-button bg-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota<br>carrello</button>
       </div>
    </div>
    <div v-else>

@@ -27,7 +27,7 @@ export default {
       </div>
       <div class="personal_btn my-3">
          <button class="fancy-button bg-success">
-            <router-link to="/" class="btn btn-success">Torna alla Home</router-link>
+            <router-link to="/" class="btn btn-success">Torna<br>alla Home</router-link>
          </button>
       </div>
    </div>
