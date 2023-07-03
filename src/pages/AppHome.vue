@@ -79,7 +79,10 @@ export default {
             this.restaurants = [];
             this.noSelected = true
          }
-         document.getElementById("lista").scrollIntoView();
+         // setTimeout(() => {
+         //    document.getElementById("lista").scrollIntoView();
+         //    console.log('bella');
+         // }, 500);
       },
       truncateDescription(text, max) {
          if(text.length > max) {
@@ -98,12 +101,12 @@ export default {
 
 <template>
    <HeroHome />
-   <div class="container-xxl">
-      <div class="row g-3 py-3 justify-content-around">
-         <div class="col-6 col-sm-4 col-md-5 col-xl-4 col-xxl-3 d-flex d-md-block justify-content-center"
-            v-for="tipo in types">
+   <div class="container">
+      <div class="d-flex flex-wrap justify-content-center my-2 py-3">
+         <div
+            v-for="tipo in types" class="mx-2 rounded-3 mb-3">
             <input :id="tipo.id" type="checkbox" class="checkbox d-none" :value="tipo.id" name="type_id[]">
-            <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center" @click="check(tipo.id), getRestaurants()">
+            <label :id="'label' + tipo.id" :for="tipo.id" class="carta bg-white text-center rounded-5" @click="check(tipo.id), getRestaurants()">
                <img class="my-select-img" :src="`${this.store.baseUrl}storage/${tipo.image}`" :alt="'Immagine ristorante ' + tipo.name">
                <h4 class="p-2 centrato flex-grow-1">{{ tipo.name }}</h4>
             </label>
@@ -117,7 +120,7 @@ export default {
          <h1 v-if="noResults">Non ci sono ristoranti che rispettano i parametri selezionati</h1>
 
          <router-link :to="`/ristorante/${restaurant.slug}`" class="my-card-restaurant card mb-3 text-decoration-none" v-for="restaurant in restaurants">
-            <div class="row g-0 h-100">
+            <div class="row h-100">
 
                <div class="card-containers col-12 col-sm-3">
                   <img v-if="restaurant.image" :src="`${this.store.baseUrl}storage/${restaurant.image}`" class="h-100 w-100 object-fit-cover rounded-start" :alt="restaurant.name">
@@ -182,6 +185,10 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/general.scss";
 
+.card-containers{
+   height: 50%;
+}
+
 img,
 .carta{
    transition: all 0.3s;
@@ -222,8 +229,8 @@ img,
 
 
 .my-select-img {
-   height: 8rem;
-   width: 8rem;
+   height: 7rem;
+    width: 10rem;
    object-fit: cover;
 }
 
@@ -267,10 +274,10 @@ img,
 @media all and (min-width: 768px) {
 
    .carta {
-      flex-direction: row;
-      border-radius: 0;
-      display: flex;
-      align-items: center;
+      // flex-direction: row;
+      // border-radius: 0;
+      // display: flex;
+      // align-items: center;
    }
 }
 
