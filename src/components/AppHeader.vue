@@ -24,7 +24,7 @@ export default {
             <router-link to="/" class="nav-link logo">
                <img class="logo" src="/deliveboo-logo.svg" alt="logo deliveboo">
             </router-link>
-            <div class="d-flex p-1 bg-danger text-white rounded-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <div class="d-flex p-1 bg-danger text-white rounded-3 fancy-button me-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                <div>
                   <i class="fa-brands fa-opencart"></i>
                </div>
