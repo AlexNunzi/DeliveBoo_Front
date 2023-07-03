@@ -18,9 +18,9 @@ export default {
 </script>
 
 <template>
-   <div class="bg-white fixed-top">
+   <div class="bg-black fixed-top">
       <div class="container">
-         <nav class="navbar navbar-expand-md bg-light justify-content-between overflow-hidden">
+         <nav class="navbar navbar-expand-md bg-black justify-content-between overflow-hidden">
             <router-link to="/" class="nav-link logo">
                <img class="logo" src="/deliveboo-logo.svg" alt="logo deliveboo">
             </router-link>
