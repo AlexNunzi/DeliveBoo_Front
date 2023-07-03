@@ -44,7 +44,7 @@ export default {
          </tbody>
       </table>
       <div class="centrato pb-3">
-         <button type="button" class="empty-cart btn btn-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
+         <button type="button" class="empty-cart btn fancy-button bg-danger" data-bs-toggle="modal" data-bs-target="#CartModal" @click.stop="">Svuota carrello</button>
       </div>
    </div>
    <div v-else>

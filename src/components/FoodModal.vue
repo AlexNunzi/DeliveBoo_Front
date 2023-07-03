@@ -35,9 +35,9 @@ export default {
                </div>
                <div class="centrato">
                   <div class="my-2 pt-1" v-if="store.cart[foodObject.slug]">
-                     <span class="px-2 bg-warning border rounded-circle" @click="store.removeFromCart(foodObject)">-</span>
+                     <i class="fa-solid fa-circle-minus text-danger fs-4" @click="store.removeFromCart(foodObject)"></i>
                      <span class="px-2 mx-2 border">{{ store.cart[foodObject.slug].quantity }}</span>
-                     <span class="px-2 bg-warning border rounded-circle" @click="store.addToCart(foodObject, restaurantSlug)">+</span>
+                     <i class="fa-solid fa-circle-plus text-success fs-4" @click="store.addToCart(foodObject, restaurantSlug)"></i>
                   </div> 
                   <div id="btn-cart" class="w-25 my-2 p-1 bg-warning rounded-5" @click="store.addToCart(foodObject, restaurantSlug)" v-else>
                      <i class="fa-brands fa-opencart"></i>

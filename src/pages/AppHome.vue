@@ -257,29 +257,6 @@ img,
    cursor: pointer;
 }
 
-.fancy-button:before {
-   content: "";
-   position: absolute;
-   top: 0;
-   left: -100%;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(255, 255, 255, 0.2);
-   transform: skewX(-30deg);
-   transition: left 0.3s ease-in-out;
-}
-
-.fancy-button:hover {
-   transform: scale(1.1);
-}
-
-.fancy-button:hover:before {
-   left: 100%;
-}
-.card-containers{
-   height: 50%;
-}
-
 //responsive
 @media all and (min-width: 576px) {
    .card-containers{
