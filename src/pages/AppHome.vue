@@ -273,12 +273,6 @@ img,
 
 @media all and (min-width: 768px) {
 
-   .carta {
-      // flex-direction: row;
-      // border-radius: 0;
-      // display: flex;
-      // align-items: center;
-   }
 }
 
 @media all and (min-width: 480px) {}
