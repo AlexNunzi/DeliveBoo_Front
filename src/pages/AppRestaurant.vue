@@ -69,7 +69,7 @@ export default {
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Attenzione!!!</h1>
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Attenzione!</h1>
                </div>
                <div class="modal-body">
                   <p>Il tuo carrello ha già prodotti di un altro ristorante!</p>
@@ -84,7 +84,8 @@ export default {
             </div>
          </div>
       </div>
-      <div id="hero" class="p-3 p-md-5 centrato" :style="{ backgroundImage: `url(${getRestaurantImage(restaurantImage)})` }">
+      <div id="hero" class="p-3 p-md-5 centrato"
+         :style="{ backgroundImage: `url(${getRestaurantImage(restaurantImage)})` }">
          <div id="info-ristorante" class="p-2 p-md-3 text-white rounded-3">
             <h3>{{ restaurant.name }}</h3>
             <h5>{{ restaurant.address }}</h5>
@@ -94,8 +95,8 @@ export default {
 
       <div id="restaurant-foods" class="row g-3 py-3 justify-content-center">
          <div v-for="food in foods" class="col-sm-6 col-md-4 col-lg-3 p-3 carta text-center p-0">
-            <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug"/>
-            <FoodModal :foodObject="food" :restaurantSlug="restaurant.slug"/>
+            <FoodCard :foodObject="food" :restaurantSlug="restaurant.slug" />
+            <FoodModal :foodObject="food" :restaurantSlug="restaurant.slug" />
          </div>
       </div>
    </div>
@@ -126,5 +127,4 @@ export default {
 @media all and (min-width: 768px) {}
 
 @media all and (min-width: 480px) {}
-
 </style>

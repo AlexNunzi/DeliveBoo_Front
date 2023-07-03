@@ -9,10 +9,10 @@ export default {
    data() {
       return {
          store,
-         customerName: '',
-         customerPhone: '',
-         customerEmail: '',
-         customerAddress: '',
+         customerName: 'Carlo Magno',
+         customerPhone: '3331113239',
+         customerEmail: 'c.magno@deliveboo.it',
+         customerAddress: 'Via Dante Alighieri 3',
          nameError: null,
          phoneError: null,
          emailError: null,
@@ -120,8 +120,7 @@ export default {
       </div>
       <div class="myLoading" v-if="loading">
          <img class="myImg"
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgbtpos.com%2Fwp-content%2Fuploads%2F2019%2F10%2FPOS-Animation.gif&f=1&nofb=1&ipt=74579b96a8ed7e91d135eb64726df2c0e36be7b78034685bdfcf581e82bacf04&ipo=images"
-         >
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgbtpos.com%2Fwp-content%2Fuploads%2F2019%2F10%2FPOS-Animation.gif&f=1&nofb=1&ipt=74579b96a8ed7e91d135eb64726df2c0e36be7b78034685bdfcf581e82bacf04&ipo=images">
       </div>
       <div v-show="!store.cartIsEmpty()" class="row row-cols-md-2 bg-white">
          <form method="POST" class="mt-5 py-2 h-100" @click="changeFormValue">
@@ -130,8 +129,7 @@ export default {
                   <div class="w-75">
                      <label for="customer_name" class="form-label">Nome:</label>
                      <input type="text" class="form-control" :class="nameError != null ? 'is-invalid' : ''"
-                        id="customer_name" name="customer_name" placeholder="Mario Rossi" @keyup="ValidationForm()"
-                        v-model="customerName" required>
+                        id="customer_name" name="customer_name" @keyup="ValidationForm()" v-model="customerName" required>
                      <div v-if="nameError != null" class="invalid-feedback">
                         <p v-for="element in nameError">{{ element }}</p>
                      </div>
@@ -140,7 +138,7 @@ export default {
                      <label for="customer_phone_number" class="form-label">Telefono:</label>
                      <input type="tel" class="form-control" :class="phoneError != null ? 'is-invalid' : ''"
                         id="customer_phone_number" name="customer_phone_number" @keyup="ValidationForm()"
-                        placeholder="012-3456789" v-model="customerPhone" required>
+                        v-model="customerPhone" required>
                      <div v-if="phoneError != null" class="invalid-feedback">
                         <p v-for="element in phoneError">{{ element }}</p>
                      </div>
@@ -150,8 +148,8 @@ export default {
             <div class="mb-3">
                <label for="customer_address" class="form-label">Indirizzo:</label>
                <input type="text" class="form-control" :class="addressError != null ? 'is-invalid' : ''"
-                  id="customer_address" name="customer_address" @keyup="ValidationForm()"
-                  placeholder="Via Le dita dal Naso 5" v-model="customerAddress" required>
+                  id="customer_address" name="customer_address" @keyup="ValidationForm()" v-model="customerAddress"
+                  required>
                <div v-if="addressError != null" class="invalid-feedback">
                   <p v-for="element in addressError">{{ element }}</p>
                </div>
@@ -159,8 +157,7 @@ export default {
             <div class="mb-3">
                <label for="customer_email" class="form-label">Email</label>
                <input type="email" class="form-control" :class="emailError != null ? 'is-invalid' : ''" id="customer_email"
-                  name="customer_email" @keyup="ValidationForm()" placeholder="m.rossi@deliveboo.it"
-                  v-model="customerEmail" required>
+                  name="customer_email" @keyup="ValidationForm()" v-model="customerEmail" required>
                <div v-if="emailError != null" class="invalid-feedback">
                   <p v-for="element in emailError">{{ element }}</p>
                </div>
@@ -169,15 +166,6 @@ export default {
          <div class="mt-3">
             <div id="dropin-container"></div>
             <button id="submit-button" type="submit" class="btn btn-primary" disabled>Salva</button>
-            <!-- <button class="button btn btn-outline-success">Purchase</button> -->
-            <ul>
-               <li>Visa: 4111111111111111</li>
-               <li>Mastercard: 5555555555554444</li>
-               <!-- <li>American Express: 378282246310005</li>
-            <li>Discover: 6011111111111117</li>
-            <li>JCB: 3530111333300000</li> -->
-            </ul>
-            <p>data: 01/25</p>
          </div>
       </div>
    </div>
@@ -209,4 +197,5 @@ export default {
    .myLoading .myImg {
       width: 500px;
    }
-}</style>
+}
+</style>
