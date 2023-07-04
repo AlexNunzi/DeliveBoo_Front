@@ -108,6 +108,7 @@ export default {
    },
    mounted() {
       this.getToken();
+      this.store.cartCounterRefresh();
    }
 }
 </script>
