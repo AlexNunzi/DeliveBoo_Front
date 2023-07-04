@@ -208,6 +208,7 @@ img,
    box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
    overflow: hidden;
    border: inset 5px gray;
+   cursor: pointer;
 
    &:hover {
       img {
