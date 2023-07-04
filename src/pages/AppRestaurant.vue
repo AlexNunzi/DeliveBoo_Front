@@ -58,6 +58,9 @@ export default {
             this.getFoods();
          }
       )
+   },
+   mounted() {
+      this.store.cartCounterRefresh();
    }
 }
 </script>
