@@ -74,10 +74,11 @@ export default {
                <div class="modal-body">
                   <p>Il tuo carrello ha già prodotti di un altro ristorante!</p>
                </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary fancy-button" data-bs-dismiss="modal" @click="changeRestaurant()">Torna al<br>ristorante precedente</button>
-                  <span>Oppure</span>
-                  <button type="button" class="btn btn-danger fancy-button" data-bs-dismiss="modal" @click="store.resetLocal()">Svuota <br>
+               <div class="modal-footer justify-content-around d-flex">
+                  <button type="button" class="btn btn-secondary fancy-button" data-bs-dismiss="modal"
+                     @click="changeRestaurant()">Torna al<br>ristorante precedente</button>
+                  <button type="button" class="btn btn-danger fancy-button" data-bs-dismiss="modal"
+                     @click="store.resetLocal()">Svuota <br>
                      il carrello</button>
                </div>
             </div>
