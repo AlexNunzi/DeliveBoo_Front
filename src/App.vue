@@ -3,14 +3,24 @@ import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
 import EmptyCart from "./components/EmptyCart.vue";
 import AppCart from './components/AppCart.vue';
+import { store } from './store.js';
+import { resolveTransitionHooks } from "vue";
 
 export default {
    name: "App.vue",
+   data() {
+      return {
+         store
+      }
+   },
    components: {
       AppHeader,
       AppFooter,
       EmptyCart,
       AppCart
+   },
+   mounted() {
+      this.store.cartCounterRefresh();
    }
 }
 </script>
