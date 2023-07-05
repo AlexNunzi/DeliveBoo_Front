@@ -95,7 +95,6 @@ export default {
    },
    mounted() {
       this.getTypes();
-      this.store.cartCounterRefresh();
    }
 }
 </script>
